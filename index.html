@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filip & Anička – Svatba</title>
+<meta name="description" content="Svatební stránky Filipa a Aničky">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --ink: #3b3a36;
+    --muted: #7a766d;
+    --accent: #8a9a7b;
+    --line: #e4ddd0;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+  h1, h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    margin: 0;
+  }
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.25rem;
+  }
+  .hero .small {
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 12vw, 6.5rem);
+    line-height: 1.05;
+    margin: 1rem 0;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero .date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+  }
+  .hero .place { color: var(--muted); margin-top: .25rem; }
+  .btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: .85rem 2rem;
+    border: 1px solid var(--accent);
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    font-size: .8rem;
+    transition: all .2s;
+  }
+  .btn:hover, .btn.solid { background: var(--accent); color: #fff; }
+  .btn.solid:hover { opacity: .85; }
+  section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 1.25rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  section h2 { font-size: 2.4rem; margin-bottom: 1.5rem; }
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li {
+    display: flex;
+    gap: 1.25rem;
+    padding: .9rem 0;
+    border-bottom: 1px dashed var(--line);
+    text-align: left;
+  }
+  .timeline li:last-child { border-bottom: none; }
+  .timeline .time {
+    min-width: 4.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .note { color: var(--muted); font-size: .95rem; }
+  footer {
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+    color: var(--muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="small">Zveme vás na naši svatbu</div>
+  <h1>Filip <em>&</em> Anička</h1>
+  <div class="date">[DOPLNIT: datum svatby]</div>
+  <div class="place">[DOPLNIT: místo]</div>
+  <!-- Po vytvoření Google Formuláře nahraďte # jeho odkazem -->
+  <a class="btn solid" href="#formular">Potvrdit účast</a>
+</header>
+
+<section id="misto">
+  <h2>Kde se to bude konat</h2>
+  <p><strong>[DOPLNIT: název místa]</strong><br>[DOPLNIT: adresa]</p>
+  <p class="note">[DOPLNIT: parkování, doprava, případně odkaz na mapu]</p>
+  <!-- Odkaz na mapu: <a class="btn" href="https://maps.app.goo.gl/...">Zobrazit na mapě</a> -->
+</section>
+
+<section id="program">
+  <h2>Program dne</h2>
+  <ul class="timeline">
+    <li><span class="time">00:00</span><span>[DOPLNIT: příchod hostů]</span></li>
+    <li><span class="time">00:00</span><span>[DOPLNIT: obřad]</span></li>
+    <li><span class="time">00:00</span><span>[DOPLNIT: gratulace a focení]</span></li>
+    <li><span class="time">00:00</span><span>[DOPLNIT: hostina]</span></li>
+    <li><span class="time">00:00</span><span>[DOPLNIT: první tanec a zábava]</span></li>
+  </ul>
+</section>
+
+<section id="ubytovani">
+  <h2>Ubytování</h2>
+  <p>[DOPLNIT: možnosti ubytování, ceny, do kdy rezervovat]</p>
+</section>
+
+<section id="formular">
+  <h2>Potvrzení účasti</h2>
+  <p>Dejte nám prosím vědět do <strong>[DOPLNIT: datum]</strong>, zda dorazíte, a vyplňte své stravovací požadavky a zájem o ubytování.</p>
+  <!-- Nahraďte # odkazem na Google Formulář -->
+  <a class="btn solid" href="#" target="_blank" rel="noopener">Vyplnit formulář</a>
+</section>
+
+<section id="kontakt">
+  <h2>Kontakt</h2>
+  <p>Cokoliv potřebujete, ozvěte se nám:<br>
+  Filip: [DOPLNIT: telefon]<br>
+  Anička: [DOPLNIT: telefon]</p>
+</section>
+
+<footer>Těšíme se na vás! ♥</footer>
+
+</body>
+</html>
