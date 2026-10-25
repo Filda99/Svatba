@@ -7,7 +7,8 @@
 <meta name="description" content="Svatební stránky Filipa a Aničky">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
 <style>
   :root {
     --bg: #faf7f2;
@@ -22,7 +23,7 @@
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Lato', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     font-weight: 300;
     line-height: 1.7;
     font-size: 17px;
@@ -32,7 +33,10 @@
     font-weight: 400;
     margin: 0;
   }
+  body { overflow-x: hidden; }
   .hero {
+    position: relative;
+    overflow: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -124,6 +128,68 @@
     font-size: 1.3rem;
     font-style: italic;
   }
+
+  /* ---------- Animace ---------- */
+  .hero > * { position: relative; z-index: 1; }
+  .hero::before, .hero::after {
+    content: '';
+    position: absolute;
+    inset: -25%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(40px);
+  }
+  .hero::before {
+    background:
+      radial-gradient(ellipse 38% 28% at 22% 30%, rgba(138,154,123,.20), transparent 70%),
+      radial-gradient(ellipse 34% 24% at 78% 68%, rgba(228,221,208,.95), transparent 70%);
+    animation: drift1 38s ease-in-out infinite alternate;
+  }
+  .hero::after {
+    background:
+      radial-gradient(ellipse 30% 22% at 70% 25%, rgba(255,255,255,.75), transparent 70%),
+      radial-gradient(ellipse 36% 26% at 25% 75%, rgba(138,154,123,.14), transparent 70%);
+    animation: drift2 52s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 {
+    from { transform: translate3d(-5%, -3%, 0) scale(1); }
+    to   { transform: translate3d(6%, 5%, 0) scale(1.12); }
+  }
+  @keyframes drift2 {
+    from { transform: translate3d(5%, 4%, 0) scale(1.08); }
+    to   { transform: translate3d(-6%, -4%, 0) scale(1); }
+  }
+  @keyframes mistIn {
+    from { opacity: 0; filter: blur(16px); transform: translateY(14px) scale(.98); }
+    to   { opacity: 1; filter: blur(0);    transform: none; }
+  }
+  .hero .small, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn {
+    animation: mistIn 2.2s cubic-bezier(.2,.6,.2,1) both;
+  }
+  .hero .small     { animation-delay: .3s; }
+  .hero h1         { animation-delay: .9s; }
+  .hero .date      { animation-delay: 1.6s; }
+  .hero .place     { animation-delay: 1.9s; }
+  .hero .countdown { animation-delay: 2.2s; }
+  .hero .btn       { animation-delay: 2.6s; }
+
+  /* Postupné vynoření při rolování */
+  .js .reveal {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+    transition: opacity 1.4s ease, filter 1.4s ease, transform 1.4s ease;
+  }
+  .js .reveal.in { opacity: 1; filter: blur(0); transform: none; }
+
+  @media (max-width: 480px) {
+    .hero .small { letter-spacing: .18em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before, .hero::after { animation: none; }
+    .hero .small, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn { animation: none; }
+    .js .reveal { opacity: 1; filter: none; transform: none; transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -168,7 +234,7 @@
 
 <section id="ubytovani">
   <h2>Ubytování</h2>
-  <p><strong>Rodina</strong><br>Spaní pro rodinu zajistíme přímo v rámci ubytování.</p>
+  <p><strong>Rodina</strong><br>Pro rodinu je spaní zajištěno v rámci ubytování.</p>
   <p><strong>Kamarádi</strong><br>Můžete si přivézt a postavit vlastní stan.</p>
   <p><strong>Snídaně</strong><br>Snídani je možné objednat po domluvě za příplatek. Musí se objednat předem, dejte nám proto vědět s předstihem.</p>
   <p class="note">Více informací brzy doplníme.</p>
@@ -200,5 +266,24 @@
   })();
 </script>
 
+<script>
+  (function () {
+    var items = document.querySelectorAll('section, footer, .timeline li');
+    items.forEach(function (el, i) { el.classList.add('reveal'); });
+    document.querySelectorAll('.timeline li').forEach(function (li, i) {
+      li.style.transitionDelay = (i * 0.15) + 's';
+    });
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
 </body>
 </html>
