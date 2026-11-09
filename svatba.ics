@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//filipanicka.cz//Svatba//CS
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:svatba-20270703@filipanicka.cz
+DTSTAMP:20261109T120000Z
+DTSTART;VALUE=DATE:20270703
+DTEND;VALUE=DATE:20270704
+SUMMARY:Svatba Filipa a Aničky
+LOCATION:Penzion Kůlna\, Senetářov 114\, 679 06 Senetářov
+DESCRIPTION:Svatba Filipa a Aničky. Více informací: https://filipanick
+ a.cz
+URL:https://filipanicka.cz
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Za týden je svatba Filipa a Aničky
+END:VALARM
+END:VEVENT
+END:VCALENDAR

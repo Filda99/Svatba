@@ -3,162 +3,172 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Filip & Anička – Svatba</title>
-<meta name="description" content="Svatební stránky Filipa a Aničky">
+<title>Filip &amp; Anička – Svatba 3. 7. 2027</title>
+<meta name="description" content="Svatební stránky Filipa a Aničky – sobota 3. července 2027, Penzion Kůlna u Jedovnic.">
+<meta name="theme-color" content="#1a2d22">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Filip &amp; Anička – Svatba 3. 7. 2027">
+<meta property="og:description" content="Zveme vás na naši svatbu. Všechny informace najdete na našich stránkách.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
   :root {
-    --bg: #faf7f2;
-    --ink: #3b3a36;
-    --muted: #7a766d;
-    --accent: #8a9a7b;
-    --line: #e4ddd0;
+    --velvet:      #26402f;   /* sametová zelená */
+    --velvet-deep: #1a2d22;
+    --cream:       #faf6ee;
+    --cream-2:     #f1eadb;
+    --ink:         #26241f;
+    --muted:       #55503f;
+    --gold:        #d8c18a;
+    --gold-dark:   #8c7433;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--cream);
     color: var(--ink);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    font-size: 17px;
-  }
-  h1, h2 {
-    font-family: 'EB Garamond', serif;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     font-weight: 400;
-    margin: 0;
+    font-size: 1.2rem;          /* ~19 px – dobře čitelné i pro starší hosty */
+    line-height: 1.7;
+    overflow-x: hidden;
   }
-  body { overflow-x: hidden; }
+  h1, h2, h3, .serif { font-family: 'EB Garamond', Georgia, serif; }
+  h1, h2 { margin: 0; font-weight: 500; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--velvet); }
+  strong { font-weight: 600; }
+
+  /* ---------- Tlačítka ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0 1.8rem;
+    border: 2px solid var(--velvet);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--velvet);
+    font: 600 1.05rem/1.2 'Source Sans 3', sans-serif;
+    letter-spacing: .04em;
+    text-decoration: none;
+    text-align: center;
+    transition: background .2s, color .2s;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--velvet); color: var(--cream); }
+  .btn.solid { background: var(--velvet); color: var(--cream); }
+  .btn.solid:hover, .btn.solid:focus-visible { background: var(--velvet-deep); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 1.6rem; }
+
+  /* ---------- Úvod ---------- */
   .hero {
     position: relative;
     overflow: hidden;
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem 1.25rem;
+    padding: 3rem 1.4rem;
+    color: var(--cream);
+    background: radial-gradient(ellipse at 50% 18%, #365a45 0%, var(--velvet) 48%, var(--velvet-deep) 100%);
   }
+  /* Po nahrání fotky (fotky/hero.jpg) stačí přidat třídu "has-photo" do <header class="hero"> */
+  .hero.has-photo {
+    background:
+      linear-gradient(rgba(20,34,26,.50), rgba(20,34,26,.80)),
+      url('fotky/hero.jpg') center top / cover no-repeat;
+  }
+  .hero > * { position: relative; z-index: 1; }
   .hero .small {
-    letter-spacing: .3em;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    font-size: .8rem;
-    color: var(--muted);
+    font-size: 1.05rem;
+    color: #e2dbc8;
   }
   .hero h1 {
-    font-size: clamp(3rem, 12vw, 6.5rem);
+    font-size: clamp(3.4rem, 15vw, 7rem);
     line-height: 1.05;
-    margin: 1rem 0;
+    margin: 1.2rem 0;
   }
-  .hero h1 em { color: var(--accent); font-style: italic; }
-  .hero .date {
+  .hero h1 em { color: var(--gold); font-style: italic; font-weight: 400; }
+  .hero .date { font-family: 'EB Garamond', serif; font-size: 2rem; line-height: 1.25; }
+  .hero .place { font-size: 1.3rem; color: #e9e3d3; margin-top: .3rem; }
+  .countdown {
+    margin-top: 1.2rem;
+    color: var(--gold);
     font-family: 'EB Garamond', serif;
+    font-style: italic;
     font-size: 1.6rem;
   }
-  .hero .place { color: var(--muted); margin-top: .25rem; }
-  .btn {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: .85rem 2rem;
-    border: 1px solid var(--accent);
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    font-size: .8rem;
-    transition: all .2s;
-  }
-  .btn:hover, .btn.solid { background: var(--accent); color: #fff; }
-  .btn.solid:hover { opacity: .85; }
-  section {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 4rem 1.25rem;
-    border-top: 1px solid var(--line);
-    text-align: center;
-  }
-  section h2 { font-size: 2.4rem; margin-bottom: 1.5rem; }
-  .timeline { list-style: none; padding: 0; margin: 0; }
-  .timeline li {
-    display: flex;
-    gap: 1.25rem;
-    padding: .9rem 0;
-    border-bottom: 1px dashed var(--line);
-    text-align: left;
-  }
-  .timeline li:last-child { border-bottom: none; }
-  .timeline .time {
-    min-width: 4.5rem;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.35rem;
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .note { color: var(--muted); font-size: .95rem; }
-  .countdown {
-    margin-top: 1rem;
-    color: var(--accent);
-    font-family: 'EB Garamond', serif;
-    font-style: italic;
-    font-size: 1.2rem;
-  }
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: .75rem;
-  }
-  .gallery p { grid-column: 1 / -1; }
-  .gallery img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+  .hero .btn { margin-top: 2.2rem; }
+  .hero .btn.solid { background: var(--cream); color: var(--velvet-deep); border-color: var(--cream); }
+  .hero .btn.solid:hover, .hero .btn.solid:focus-visible { background: var(--gold); border-color: var(--gold); }
+
+  /* ---------- Sekce ---------- */
+  section { padding: 4.5rem 1.4rem; text-align: center; }
+  section:nth-of-type(even) { background: var(--cream-2); }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  section h2 { font-size: clamp(2.4rem, 8vw, 3.2rem); line-height: 1.15; color: var(--velvet); }
+  section h2::after {
+    content: '';
     display: block;
+    width: 64px; height: 2px;
+    background: var(--gold-dark);
+    margin: 1rem auto 2rem;
   }
+  .fact { font-family: 'EB Garamond', serif; font-size: 1.9rem; line-height: 1.3; color: var(--velvet); margin-bottom: .2rem; }
+  .label { display: block; font-weight: 600; color: var(--velvet); margin-bottom: .1rem; }
+  .block { margin-bottom: 1.8rem; }
+  .note { color: var(--muted); font-size: 1.05rem; }
+
+  .faq { margin: 0; }
+  .faq dt { font-family: 'EB Garamond', serif; font-size: 1.6rem; line-height: 1.3; color: var(--velvet); font-weight: 500; }
+  .faq dd { margin: .2rem 0 1.9rem; }
+  .faq dd:last-child { margin-bottom: 0; }
+
   footer {
     text-align: center;
-    padding: 3rem 1rem 4rem;
-    color: var(--muted);
+    padding: 3.5rem 1.4rem 4rem;
+    background: var(--velvet-deep);
+    color: #e2dbc8;
     font-family: 'EB Garamond', serif;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-style: italic;
   }
+  footer small { display: block; margin-top: .6rem; font-size: 1.05rem; letter-spacing: .12em; font-style: normal; color: var(--gold); }
 
   /* ---------- Animace ---------- */
-  .hero > * { position: relative; z-index: 1; }
   .hero::before, .hero::after {
     content: '';
     position: absolute;
     inset: -25%;
     pointer-events: none;
     z-index: 0;
-    filter: blur(40px);
+    filter: blur(50px);
   }
   .hero::before {
     background:
-      radial-gradient(ellipse 38% 28% at 22% 30%, rgba(138,154,123,.20), transparent 70%),
-      radial-gradient(ellipse 34% 24% at 78% 68%, rgba(228,221,208,.95), transparent 70%);
+      radial-gradient(ellipse 38% 28% at 22% 30%, rgba(150,190,160,.22), transparent 70%),
+      radial-gradient(ellipse 34% 24% at 78% 68%, rgba(255,255,255,.08), transparent 70%);
     animation: drift1 38s ease-in-out infinite alternate;
   }
   .hero::after {
     background:
-      radial-gradient(ellipse 30% 22% at 70% 25%, rgba(255,255,255,.75), transparent 70%),
-      radial-gradient(ellipse 36% 26% at 25% 75%, rgba(138,154,123,.14), transparent 70%);
+      radial-gradient(ellipse 30% 22% at 70% 25%, rgba(216,193,138,.14), transparent 70%),
+      radial-gradient(ellipse 36% 26% at 25% 75%, rgba(255,255,255,.07), transparent 70%);
     animation: drift2 52s ease-in-out infinite alternate;
   }
-  @keyframes drift1 {
-    from { transform: translate3d(-5%, -3%, 0) scale(1); }
-    to   { transform: translate3d(6%, 5%, 0) scale(1.12); }
-  }
-  @keyframes drift2 {
-    from { transform: translate3d(5%, 4%, 0) scale(1.08); }
-    to   { transform: translate3d(-6%, -4%, 0) scale(1); }
-  }
+  @keyframes drift1 { from { transform: translate3d(-5%,-3%,0) scale(1); }    to { transform: translate3d(6%,5%,0) scale(1.12); } }
+  @keyframes drift2 { from { transform: translate3d(5%,4%,0) scale(1.08); }   to { transform: translate3d(-6%,-4%,0) scale(1); } }
   @keyframes mistIn {
     from { opacity: 0; filter: blur(16px); transform: translateY(14px) scale(.98); }
     to   { opacity: 1; filter: blur(0);    transform: none; }
@@ -173,7 +183,6 @@
   .hero .countdown { animation-delay: 2.2s; }
   .hero .btn       { animation-delay: 2.6s; }
 
-  /* Postupné vynoření při rolování */
   .js .reveal {
     opacity: 0;
     filter: blur(10px);
@@ -183,12 +192,14 @@
   .js .reveal.in { opacity: 1; filter: blur(0); transform: none; }
 
   @media (max-width: 480px) {
-    .hero .small { letter-spacing: .18em; }
+    .hero .small { letter-spacing: .14em; font-size: 1rem; }
+    .btn { width: 100%; max-width: 360px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .hero::before, .hero::after { animation: none; }
     .hero .small, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn { animation: none; }
     .js .reveal { opacity: 1; filter: none; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
@@ -196,93 +207,151 @@
 
 <header class="hero">
   <div class="small">Zveme vás na naši svatbu</div>
-  <h1>Filip <em>&</em> Anička</h1>
+  <h1>Filip <em>&amp;</em> Anička</h1>
   <div class="date">sobota 3. července 2027</div>
-  <div class="place">Jedovnice, Kůlna</div>
+  <div class="place">Penzion Kůlna u Jedovnic</div>
   <div class="countdown" id="countdown"></div>
-  <!-- Po vytvoření Google Formuláře nahraďte # jeho odkazem -->
   <a class="btn solid" href="#formular">Potvrdit účast</a>
 </header>
 
 <section id="misto">
-  <h2>Kde se to bude konat</h2>
-  <p><strong>Kůlna</strong><br>Jedovnice</p>
-  <p class="note">Na místě je možnost parkování.</p>
-  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=K%C5%AFlna+Jedovnice" target="_blank" rel="noopener">Zobrazit na mapě</a>
+  <div class="wrap">
+    <h2>Kdy a kde</h2>
+    <p class="fact">sobota 3. července 2027</p>
+    <p class="fact">Penzion Kůlna</p>
+    <p>Senetářov 114, 679 06<br>(u Jedovnic, Moravský kras)</p>
+    <p class="note">Na místě je možnost parkování.</p>
+    <div class="btn-row">
+      <a class="btn solid" href="https://maps.app.goo.gl/NuivH8XHvcqM93v79" target="_blank" rel="noopener">Zobrazit na mapě</a>
+    </div>
+    <p class="block" style="margin-top:2.2rem"><span class="label">Přidat do kalendáře</span></p>
+    <div class="btn-row" style="margin-top:-.8rem">
+      <a class="btn" id="cal-google" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Svatba+Filipa+a+Ani%C4%8Dky&amp;dates=20270703%2F20270704&amp;location=Penzion+K%C5%AFlna%2C+Senet%C3%A1%C5%99ov+114%2C+679+06&amp;details=Svatba+Filipa+a+Ani%C4%8Dky.+V%C3%ADce+informac%C3%AD%3A+https%3A%2F%2Ffilipanicka.cz" target="_blank" rel="noopener">Google kalendář</a>
+      <a class="btn" href="svatba.ics" download="svatba-filip-anicka.ics">Apple / Outlook</a>
+    </div>
+  </div>
 </section>
 
 <section id="program">
-  <h2>Program dne</h2>
-  <ul class="timeline">
-    <li><span class="time">00:00</span><span>[DOPLNIT: příchod hostů]</span></li>
-    <li><span class="time">00:00</span><span>[DOPLNIT: obřad]</span></li>
-    <li><span class="time">00:00</span><span>[DOPLNIT: gratulace a focení]</span></li>
-    <li><span class="time">00:00</span><span>[DOPLNIT: hostina]</span></li>
-    <li><span class="time">00:00</span><span>[DOPLNIT: první tanec a zábava]</span></li>
-  </ul>
-</section>
-
-<section id="fotky">
-  <h2>Fotky</h2>
-  <div class="gallery">
-    <!-- Fotky nahrajte do složky "fotky" v repozitáři a přidejte řádky podle vzoru:
-    <a href="fotky/foto1.jpg"><img src="fotky/foto1.jpg" alt="Filip a Anička" loading="lazy"></a>
+  <div class="wrap">
+    <h2>Program dne</h2>
+    <p>Podrobný program dne vám brzy doplníme.</p>
+    <!-- Až bude program hotový, nahraďte odstavec výše seznamem:
+    <ul class="timeline">
+      <li><span class="time">14:00</span><span>Obřad</span></li>
+    </ul>
     -->
-    <p class="note">Fotky brzy doplníme.</p>
   </div>
 </section>
 
 <section id="ubytovani">
-  <h2>Ubytování</h2>
-  <p><strong>Rodina</strong><br>Pro rodinu je spaní zajištěno v rámci ubytování.</p>
-  <p><strong>Kamarádi</strong><br>Můžete si přivézt a postavit vlastní stan.</p>
-  <p><strong>Snídaně</strong><br>Snídani je možné objednat po domluvě za příplatek. Musí se objednat předem, dejte nám proto vědět s předstihem.</p>
-  <p class="note">Více informací brzy doplníme.</p>
+  <div class="wrap">
+    <h2>Ubytování</h2>
+    <p class="block"><span class="label">Rodina</span>Pro rodinu je spaní zajištěno v rámci ubytování v penzionu.</p>
+    <p class="block"><span class="label">Kamarádi</span>Můžete si přivézt a postavit vlastní stan.</p>
+    <p class="block"><span class="label">Snídaně</span>Snídani je možné objednat po domluvě za příplatek. Musí se objednat předem, dejte nám proto včas vědět.</p>
+    <p class="note">Penzion leží v tiché krajině Moravského krasu. Více o místě najdete na <a href="https://kulna-jedovnice.cz/" target="_blank" rel="noopener">kulna-jedovnice.cz</a>.</p>
+  </div>
 </section>
 
 <section id="formular">
-  <h2>Potvrzení účasti</h2>
-  <p>Dejte nám prosím vědět do <strong>[DOPLNIT: datum]</strong>, zda dorazíte, a vyplňte své stravovací požadavky a zájem o ubytování.</p>
-  <!-- Nahraďte # odkazem na Google Formulář -->
-  <a class="btn solid" href="#" target="_blank" rel="noopener">Vyplnit formulář</a>
+  <div class="wrap">
+    <h2>Potvrzení účasti</h2>
+    <p>Dejte nám prosím včas vědět, zda dorazíte. Ve formuláři vyplníte také stravovací požadavky, zájem o ubytování a snídani. Můžete nám napsat i písničku, na kterou si určitě chcete zatančit.</p>
+    <div class="btn-row">
+      <a class="btn solid" data-link="form" target="_blank" rel="noopener" hidden>Vyplnit formulář</a>
+    </div>
+    <p class="note" data-soon="form">Formulář připravujeme, odkaz se tu brzy objeví.</p>
+  </div>
 </section>
 
-<section id="kontakt">
-  <h2>Kontakt</h2>
-  <p>Cokoliv potřebujete, ozvěte se nám:<br>
-  Filip: [DOPLNIT: telefon]<br>
-  Anička: [DOPLNIT: telefon]</p>
+<section id="otazky">
+  <div class="wrap">
+    <h2>Časté dotazy</h2>
+    <dl class="faq">
+      <dt>Jak se obléknout?</dt>
+      <dd>Dress code nemáme. Přijďte ve společenském oblečení, ve kterém se budete cítit dobře.</dd>
+
+      <dt>Jak se dostaneme domů?</dt>
+      <dd>Rozvoz domů zajistíme. Kdo by chtěl zůstat přes noc, může přespat v penzionu, nebo ve vlastním stanu.</dd>
+
+      <dt>Můžeme přijít se zvířátkem?</dt>
+      <dd>Čtyřnozí kamarádi jsou vítáni.</dd>
+
+      <dt>Co dárky?</dt>
+      <dd>Největší radost nám uděláte finančním příspěvkem.</dd>
+    </dl>
+  </div>
 </section>
 
-<footer>Těšíme se na vás! ♥</footer>
+<section id="hudba">
+  <div class="wrap">
+    <h2>Hudba</h2>
+    <p>Večer nám zahraje kapela a potom bude společná zábava, kde si každý může zatancovat na svou písničku. Přidejte do našeho playlistu to, co chcete slyšet.</p>
+    <div class="btn-row">
+      <a class="btn solid" data-link="playlist" target="_blank" rel="noopener" hidden>Přidat písničku</a>
+    </div>
+    <p class="note" data-soon="playlist">Playlist připravujeme, odkaz se tu brzy objeví.</p>
+  </div>
+</section>
+
+<section id="album">
+  <div class="wrap">
+    <h2>Společné album</h2>
+    <p>Po svatbě sem můžete všichni nahrát své fotky a videa z telefonu. Budeme rádi za každou vzpomínku, ať máme den i z vašeho pohledu.</p>
+    <div class="btn-row">
+      <a class="btn solid" data-link="album" target="_blank" rel="noopener" hidden>Otevřít album</a>
+    </div>
+    <p class="note" data-soon="album">Odkaz na album se tu objeví před svatbou.</p>
+  </div>
+</section>
+
+<footer>
+  Těšíme se na vás! ♥
+  <small>FILIP &amp; ANIČKA</small>
+</footer>
 
 <script>
-  (function () {
-    var el = document.getElementById('countdown');
-    var days = Math.ceil((new Date(2027, 6, 3) - new Date()) / 86400000);
-    if (days > 1) el.textContent = 'Zbývá ' + days + ' dní';
-    else if (days === 1) el.textContent = 'Už zítra!';
-    else if (days === 0) el.textContent = 'Dnes je ten den!';
-  })();
-</script>
+  /* Sem vložte odkazy, tlačítka se pak sama zobrazí. */
+  var LINKS = {
+    form:     '',   // odkaz na Google Formulář
+    playlist: '',   // odkaz na společný Spotify playlist
+    album:    ''    // odkaz na sdílené album (Google Fotky)
+  };
 
-<script>
   (function () {
-    var items = document.querySelectorAll('section, footer, .timeline li');
-    items.forEach(function (el, i) { el.classList.add('reveal'); });
-    document.querySelectorAll('.timeline li').forEach(function (li, i) {
-      li.style.transitionDelay = (i * 0.15) + 's';
+    // Odkazy
+    document.querySelectorAll('[data-link]').forEach(function (a) {
+      var key = a.getAttribute('data-link');
+      if (!LINKS[key]) return;
+      a.href = LINKS[key];
+      a.hidden = false;
+      var soon = document.querySelector('[data-soon="' + key + '"]');
+      if (soon) soon.hidden = true;
     });
+
+    // Odpočet ve dnech
+    var el = document.getElementById('countdown');
+    var now = new Date(); now.setHours(0, 0, 0, 0);
+    var n = Math.round((new Date(2027, 6, 3) - now) / 86400000);
+    if (n > 4)       el.textContent = 'Zbývá ' + n + ' dní';
+    else if (n > 1)  el.textContent = 'Zbývají ' + n + ' dny';
+    else if (n === 1) el.textContent = 'Už zítra!';
+    else if (n === 0) el.textContent = 'Dnes je ten den!';
+
+    // Vynoření při rolování
+    var items = document.querySelectorAll('section .wrap, footer');
+    items.forEach(function (x) { x.classList.add('reveal'); });
     if (!('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('in'); });
+      items.forEach(function (x) { x.classList.add('in'); });
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.15 });
-    items.forEach(function (el) { io.observe(el); });
+    }, { threshold: 0.12 });
+    items.forEach(function (x) { io.observe(x); });
   })();
 </script>
 </body>
