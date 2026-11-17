@@ -299,11 +299,11 @@
   @media (min-width: 900px) and (min-aspect-ratio: 5/4) {
     .hero { align-items: flex-start; padding-left: clamp(2rem, 5vw, 6rem); }
     .hero-main, .hero-bottom { width: 54%; }
-    .hero::before { background-position: right clamp(2rem, calc(14vw - 6rem), 14rem) bottom; background-size: auto 86%; }
+    .hero::before { background-position: right clamp(2rem, calc(14vw - 6rem), 14rem) bottom 4svh; background-size: auto 86%; }
     /* vtip nad kresbou Kůlny (vpravo nahoře), aby nebyl vtěsnaný mezi jména a prstýnky */
     .hero-joke {
       position: absolute;
-      top: calc(var(--nav-h) + 3rem);
+      top: max(calc(var(--nav-h) + 1rem), calc(22svh - 5rem));
       right: clamp(2rem, calc(14vw - 6rem), 14rem);
       width: calc(86svh * .747);
       max-width: none;
