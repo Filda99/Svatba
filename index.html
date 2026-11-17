@@ -212,8 +212,19 @@
   .wrap.wide { max-width: 1000px; }
   .gallery { display: grid; gap: var(--gap-block) var(--gap); grid-template-columns: 1fr; margin-top: var(--gap-block); align-items: start; }
   .gallery figure { margin: 0; }
-  .gallery img { display: block; width: 100%; height: auto; border-radius: 2px; background: var(--line); }
-  .gallery figcaption { margin: .7rem auto 0; max-width: 30rem; font-style: italic; text-wrap: balance; }
+  .gallery figure { padding: 12px; }
+  .ph { position: relative; display: block; }
+  .gallery img { display: block; width: 100%; height: auto; background: var(--line); }
+  /* ručně kreslené rámečky: dvě nepřesné linky kolem fotky */
+  .ph::before, .ph::after {
+    content: ''; position: absolute; pointer-events: none;
+    border: 1.5px solid var(--accent);
+  }
+  .ph::before { inset: -9px -8px -8px -10px; filter: url(#rough1); transform: rotate(-.35deg); }
+  .ph::after  { inset: -6px -11px -11px -6px; filter: url(#rough2); transform: rotate(.3deg); opacity: .75; }
+  .gallery figure:nth-child(even) .ph::before { transform: rotate(.3deg); }
+  .gallery figure:nth-child(even) .ph::after  { transform: rotate(-.35deg); }
+  .gallery figcaption { margin: 1.2rem auto 0; max-width: 30rem; font-style: italic; text-wrap: balance; }
   @media (min-width: 700px) {
     .gallery { grid-template-columns: 1fr 1fr; }
     .gallery .land img { aspect-ratio: 4 / 3; object-fit: cover; }
@@ -348,6 +359,11 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="rough1" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>
+  <filter id="rough2" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="1" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="6"/></filter>
+</svg>
+
 <nav class="menu" aria-label="Menu">
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-list">Menu</button>
   <ul id="menu-list">
@@ -423,18 +439,16 @@
     <h2>Deset let spolu</h2>
     <p>Pár momentek z&nbsp;cesty, která nás po deseti letech dovedla až k&nbsp;oltáři.</p>
     <div class="gallery">
-      <figure class="port"><img src="img/foto/01.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>Společenské oblečení umíme už dlouho.</figcaption></figure>
-      <figure class="port"><img src="img/foto/02.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>Moře, slunce&nbsp;a výraz, který se nedá zopakovat.</figcaption></figure>
-      <figure class="land"><img src="img/foto/03.jpg" width="1400" height="1050" alt="" loading="lazy" decoding="async"><figcaption>Zmrzlina je&nbsp;v našem vztahu důležitější, než byste čekali.</figcaption></figure>
-      <figure class="land"><img src="img/foto/04.jpg" width="878" height="574" alt="" loading="lazy" decoding="async"><figcaption>Fotokoutek nelže.</figcaption></figure>
-      <figure class="land"><img src="img/foto/05.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Výlety, kde Filip tvrdí, že ví, kam jdeme.</figcaption></figure>
-      <figure class="land"><img src="img/foto/06.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Ten výraz je záměr. Možná.</figcaption></figure>
-      <figure class="land"><img src="img/foto/07.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Čtyřnozí kamarádi jsou vítáni. Máme natrénováno.</figcaption></figure>
-      <figure class="land"><img src="img/foto/08.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Výhled krásný, kondice průměrná.</figcaption></figure>
-      <figure class="land"><img src="img/foto/09.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Další zmrzlina. Vidíte vzorec.</figcaption></figure>
-      <figure class="land"><img src="img/foto/10.jpg" width="1400" height="1050" alt="" loading="lazy" decoding="async"><figcaption>Tady Anička řekla ano.</figcaption></figure>
-      <figure class="port"><img src="img/foto/11.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>Madeira, prsten&nbsp;a srdce&nbsp;v písku.</figcaption></figure>
-      <figure class="port"><img src="img/foto/12.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>A teď jdeme ruku&nbsp;v ruce dál. Až do&nbsp;Kůlny.</figcaption></figure>
+      <figure class="port"><span class="ph"><img src="img/foto/01.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"></span><figcaption>Společně jsme zdolali už několik životních zkoušek. Tahle skončila diplomem a&nbsp;kyticí.</figcaption></figure>
+      <figure class="port"><span class="ph"><img src="img/foto/02.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"></span><figcaption>Tak tahle fotka je už hodně stará, to jsem byl ještě plný elánu.</figcaption></figure>
+      <figure class="land"><span class="ph"><img src="img/foto/03.jpg" width="1400" height="1050" alt="" loading="lazy" decoding="async"></span><figcaption>Zmrzlina je v&nbsp;našem vztahu důležitější, než byste čekali.</figcaption></figure>
+      <figure class="land"><span class="ph"><img src="img/foto/05.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"></span><figcaption>Ví a&nbsp;vidí, kam jdeme!</figcaption></figure>
+      <figure class="land"><span class="ph"><img src="img/foto/06.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"></span><figcaption>Parlament v&nbsp;pozadí, ale doma stejně rozhoduje Anička.</figcaption></figure>
+      <figure class="land"><span class="ph"><img src="img/foto/07.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"></span><figcaption>Fany zapnula turbo mód (uši dozadu), protože uviděla myšku. Neudrželi jsme ji.</figcaption></figure>
+      <figure class="land"><span class="ph"><img src="img/foto/08.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"></span><figcaption>Výhled krásný, kondice průměrná.</figcaption></figure>
+      <figure class="land"><span class="ph"><img src="img/foto/10.jpg" width="1400" height="1050" alt="" loading="lazy" decoding="async"></span><figcaption>Tady Anička řekla ano.</figcaption></figure>
+      <figure class="port"><span class="ph"><img src="img/foto/11.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"></span><figcaption>Srdce v&nbsp;písku, prsten na ruce a&nbsp;Filip, který to nepokazil. Zázrak.</figcaption></figure>
+      <figure class="port"><span class="ph"><img src="img/foto/12.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"></span><figcaption>A&nbsp;teď jdeme ruku v&nbsp;ruce dál. Až do&nbsp;Kůlny.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -445,7 +459,7 @@
     <p class="lead">Rodina to má jasné: přespí v&nbsp;penzionu a&nbsp;zaplatíme to my. Přátelé si můžou užít kempování pod širým nebem, nebo se po zábavě nechat odvézt domů do vlastní postele.</p>
     <div class="rows">
       <div class="row"><h3>Spaní v&nbsp;penzionu</h3><p>Pro rodinu. Postel, střecha nad hlavou a&nbsp;zaplaceno. Jen nám prosím včas dejte vědět, že o&nbsp;spaní stojíte, ať s&nbsp;vámi můžeme počítat.</p></div>
-      <div class="row"><h3>Spaní venku</h3><p>Pro přátele. Přijeďte se stanem, obytňákem nebo karavanem, nebo spěte v&nbsp;autě, pod autem či pod širým nebem. Je to jako na festivalu, jen s&nbsp;lepší společností, a&nbsp;všechno to může stát venku na trávě u&nbsp;penzionu. WC i&nbsp;sprcha budou po ruce. Pod autem doporučujeme jen lidem s&nbsp;pevnými nervy a&nbsp;zatáhnutou ruční brzdou.</p></div>
+      <div class="row"><h3>Spaní venku</h3><p>Pro přátele. Přijeďte se stanem, obytňákem nebo karavanem, nebo spěte v&nbsp;autě, pod autem či pod širým nebem. Je to jako na festivalu, jen s&nbsp;lepší společností, a&nbsp;všechno to může stát venku na trávě u&nbsp;penzionu. WC i&nbsp;sprcha budou po ruce.</p></div>
       <div class="row"><h3>Snídaně</h3><p>Snídani si můžete objednat předem po domluvě za příplatek. Hladový host je nešťastný host a&nbsp;ráno po svatbě i&nbsp;dost nebezpečný, takže nám prosím včas dejte vědět.</p></div>
     </div>
     <p>Penzion leží v&nbsp;tiché krajině Moravského krasu. Více o&nbsp;místě najdete na <a href="https://kulna-jedovnice.cz/" target="_blank" rel="noopener">kulna-jedovnice.cz</a>.</p>
@@ -481,7 +495,7 @@
       </div>
       <div class="qa">
         <dt>Můžeme přijít se zvířátkem?</dt>
-        <dd>Čtyřnozí kamarádi jsou vítáni. Vícenozí (pavouci, stonožky) a&nbsp;beznozí (hadi, žížaly) prosíme nechte doma, ať se nikdo nelekne. (Prostě jenom PEJSCI!!)</dd>
+        <dd>Čtyřnozí kamarádi jsou vítáni. (Jenom PEJSCI!)</dd>
       </div>
       <div class="qa">
         <dt>Co dárky?</dt>
