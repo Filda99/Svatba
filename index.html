@@ -209,10 +209,16 @@
   .lead { max-width: 40rem; }
 
   /* Fotky */
-  .gallery { display: grid; gap: var(--gap); grid-template-columns: 1fr; margin-top: var(--gap-block); }
+  .wrap.wide { max-width: 1000px; }
+  .gallery { display: grid; gap: var(--gap-block) var(--gap); grid-template-columns: 1fr; margin-top: var(--gap-block); align-items: start; }
   .gallery figure { margin: 0; }
-  .gallery img { display: block; width: 100%; height: auto; border-radius: 2px; }
-  @media (min-width: 600px) { .gallery { grid-template-columns: 1fr 1fr; } }
+  .gallery img { display: block; width: 100%; height: auto; border-radius: 2px; background: var(--line); }
+  .gallery figcaption { margin: .7rem auto 0; max-width: 30rem; font-style: italic; text-wrap: balance; }
+  @media (min-width: 700px) {
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .gallery .land img { aspect-ratio: 4 / 3; object-fit: cover; }
+    .gallery .port img { aspect-ratio: 3 / 4; object-fit: cover; }
+  }
 
   /* Menu (fixní lišta nahoře) */
   .menu {
@@ -347,11 +353,11 @@
   <ul id="menu-list">
     <li><a href="#misto">Kdy a&nbsp;kde</a></li>
     <li><a href="#program">Program</a></li>
+    <li><a href="#fotky">Fotky</a></li>
     <li><a href="#ubytovani">Ubytování</a></li>
     <li><a href="#formular">Účast</a></li>
     <li><a href="#otazky">Dotazy</a></li>
-    <li id="menu-fotky" hidden><a href="#fotky">Fotky</a></li>
-  </ul>
+      </ul>
 </nav>
 
 <header class="hero">
@@ -412,6 +418,27 @@
   </div>
 </section>
 
+<section id="fotky">
+  <div class="wrap wide">
+    <h2>Deset let spolu</h2>
+    <p>Pár momentek z&nbsp;cesty, která nás po deseti letech dovedla až k&nbsp;oltáři.</p>
+    <div class="gallery">
+      <figure class="port"><img src="img/foto/01.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>Společenské oblečení umíme už dlouho.</figcaption></figure>
+      <figure class="port"><img src="img/foto/02.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>Moře, slunce&nbsp;a výraz, který se nedá zopakovat.</figcaption></figure>
+      <figure class="land"><img src="img/foto/03.jpg" width="1400" height="1050" alt="" loading="lazy" decoding="async"><figcaption>Zmrzlina je&nbsp;v našem vztahu důležitější, než byste čekali.</figcaption></figure>
+      <figure class="land"><img src="img/foto/04.jpg" width="878" height="574" alt="" loading="lazy" decoding="async"><figcaption>Fotokoutek nelže.</figcaption></figure>
+      <figure class="land"><img src="img/foto/05.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Výlety, kde Filip tvrdí, že ví, kam jdeme.</figcaption></figure>
+      <figure class="land"><img src="img/foto/06.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Ten výraz je záměr. Možná.</figcaption></figure>
+      <figure class="land"><img src="img/foto/07.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Čtyřnozí kamarádi jsou vítáni. Máme natrénováno.</figcaption></figure>
+      <figure class="land"><img src="img/foto/08.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Výhled krásný, kondice průměrná.</figcaption></figure>
+      <figure class="land"><img src="img/foto/09.jpg" width="1400" height="1052" alt="" loading="lazy" decoding="async"><figcaption>Další zmrzlina. Vidíte vzorec.</figcaption></figure>
+      <figure class="land"><img src="img/foto/10.jpg" width="1400" height="1050" alt="" loading="lazy" decoding="async"><figcaption>Tady Anička řekla ano.</figcaption></figure>
+      <figure class="port"><img src="img/foto/11.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>Madeira, prsten&nbsp;a srdce&nbsp;v písku.</figcaption></figure>
+      <figure class="port"><img src="img/foto/12.jpg" width="1050" height="1400" alt="" loading="lazy" decoding="async"><figcaption>A teď jdeme ruku&nbsp;v ruce dál. Až do&nbsp;Kůlny.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section id="ubytovani">
   <div class="wrap">
     <h2>Ubytování</h2>
@@ -461,16 +488,6 @@
         <dd>Nejvíce nás potěší, když tento den strávíte s&nbsp;námi. Pokud byste nám přesto chtěli něco darovat, přivítáme spíše malý finanční dar než věcné dárky.</dd>
       </div>
     </dl>
-  </div>
-</section>
-
-<!-- Fotky: odkomentujte hidden na sekci i na položce menu (#menu-fotky), až nahrajete snímky do img/foto/ -->
-<section id="fotky" hidden>
-  <div class="wrap">
-    <h2>Naše fotky</h2>
-    <div class="gallery">
-      <!-- <figure><img src="img/foto/01.jpg" alt="" loading="lazy" decoding="async"></figure> -->
-    </div>
   </div>
 </section>
 
