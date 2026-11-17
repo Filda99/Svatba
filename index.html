@@ -289,7 +289,7 @@
       top: calc(var(--nav-h) + 3rem);
       right: clamp(2rem, calc(14vw - 6rem), 14rem);
       width: calc(86svh * .747);
-      max-width: 34rem;
+      max-width: none;
       margin: 0;
       font-size: var(--fs-eyebrow);
       text-align: center;
@@ -297,7 +297,11 @@
     .hero h1 { font-size: clamp(3.4rem, 7vw, 6.5rem); }
   }
   @media (min-width: 601px) { :root { --draw-opacity: .75; } }
-  @media (max-width: 600px) { .hero-main { justify-content: flex-start; padding-top: 9vh; } }
+  /* Mobil: text nahoře, kresba oříznutá a posunutá níž (jako na pozvánce) */
+  @media (max-width: 600px) {
+    .hero-main { justify-content: flex-start; padding-top: 0; }
+    .hero::before { background-size: 100% auto; background-position: center calc(100% + 34vw); }
+  }
 
   /* ---------- Animace (jemné vynoření z mlhy) ---------- */
   @keyframes drawIn { from { opacity: 0; } to { opacity: var(--draw-opacity); } }
@@ -354,7 +358,7 @@
   <div class="hero-main">
     <div class="eyebrow kicker">Zveme vás na naši svatbu</div>
     <h1>Filip <em>&amp;</em> Anička</h1>
-    <p class="hero-joke">Nevíme, jak to Filip dokázal, ale Anička souhlasila.</p>
+    <p class="hero-joke">Nevíme, jak to Filip dokázal, ale Anička souhlasila. Po deseti letech zkušební doby to konečně uděláme oficiálně.</p>
     <img class="deco deco-rings" src="img/prstynky.png" alt="" width="96" height="77">
     <div class="date-block">
       <span class="eyebrow">sobota</span>
