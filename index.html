@@ -5,71 +5,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Filip &amp; Anička – Svatba 3. 7. 2027</title>
 <meta name="description" content="Svatební stránky Filipa a Aničky – sobota 3. července 2027, Penzion Kůlna u Jedovnic.">
-<meta name="theme-color" content="#1a2d22">
+<meta name="theme-color" content="#FBF8F3">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:title" content="Filip &amp; Anička – Svatba 3. 7. 2027">
 <meta property="og:description" content="Zveme vás na naši svatbu. Všechny informace najdete na našich stránkách.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
+  /* ---------- Design tokeny (podle tištěné pozvánky) ---------- */
   :root {
-    --velvet:      #26402f;   /* sametová zelená */
-    --velvet-deep: #1a2d22;
-    --cream:       #faf6ee;
-    --cream-2:     #f1eadb;
-    --ink:         #26241f;
-    --muted:       #55503f;
-    --gold:        #d8c18a;
-    --gold-dark:   #8c7433;
+    --accent:       #A95C38;  /* hnědooranžová ze západu slunce */
+    --accent-hover: #7E4329;  /* tmavší akcent pro hover */
+    --text:         #2B2826;  /* hlavní text, teplá téměř černá */
+    --text-strong:  #1F1C1A;  /* zvýrazněný text */
+    --bg:           #FBF8F3;  /* teplá krémová */
+    --line:         #E2DCD2;  /* jemné oddělovače, rámečky */
+    --muted:        #B9B1A6;  /* linky a tlumené prvky (ne pro text) */
+
+    --font-display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    --font-text:    'EB Garamond', Georgia, 'Times New Roman', serif;
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-text);
     font-weight: 400;
-    font-size: 1.2rem;          /* ~19 px – dobře čitelné i pro starší hosty */
-    line-height: 1.7;
+    font-size: 1.3rem;          /* EB Garamond má menší x-výšku, proto víc: dobře čitelné i pro starší hosty */
+    line-height: 1.55;
     overflow-x: hidden;
   }
-  h1, h2, h3, .serif { font-family: 'EB Garamond', Georgia, serif; }
   h1, h2 { margin: 0; font-weight: 500; }
   p { margin: 0 0 1rem; }
-  a { color: var(--velvet); }
-  strong { font-weight: 600; }
+  strong { font-weight: 600; color: var(--text-strong); }
+
+  a { color: var(--accent); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+  a:hover { color: var(--accent-hover); }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; }
 
   /* ---------- Tlačítka ---------- */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 56px;
-    padding: 0 1.8rem;
-    border: 2px solid var(--velvet);
+    min-height: 54px;
+    padding: 0 2rem;
+    border: 1px solid var(--accent);
     border-radius: 2px;
     background: transparent;
-    color: var(--velvet);
-    font: 600 1.05rem/1.2 'Source Sans 3', sans-serif;
-    letter-spacing: .04em;
+    color: var(--accent);
+    font: 500 1rem/1.2 var(--font-text);
+    letter-spacing: .14em;
+    text-transform: uppercase;
     text-decoration: none;
     text-align: center;
-    transition: background .2s, color .2s;
+    transition: background .2s, color .2s, border-color .2s;
   }
-  .btn:hover, .btn:focus-visible { background: var(--velvet); color: var(--cream); }
-  .btn.solid { background: var(--velvet); color: var(--cream); }
-  .btn.solid:hover, .btn.solid:focus-visible { background: var(--velvet-deep); }
+  .btn:hover, .btn:focus-visible { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--bg); }
+  .btn.solid { background: var(--accent); color: var(--bg); }
+  .btn.solid:hover, .btn.solid:focus-visible { background: var(--accent-hover); border-color: var(--accent-hover); }
   .btn-row { display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 1.6rem; }
+
+  /* ---------- Datum: SOBOTA / │ 03 · 07 · 2027 │ ---------- */
+  .date { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
+  .date .dow {
+    font: 500 .95rem/1 var(--font-text);
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--text-strong);
+    padding-left: .24em;       /* vyrovná poslední mezeru prostrkání */
+  }
+  .date .dnum {
+    position: relative;
+    padding: 0 1.2rem;
+    font: 600 clamp(1.9rem, 8vw, 2.6rem)/1.2 var(--font-display);
+    font-variant-numeric: lining-nums;   /* klasické číslice, ne „staročíslice“ (dobře čitelné datum) */
+    letter-spacing: .05em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .date .dnum::before, .date .dnum::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    height: 1.5em;
+    background: var(--accent);
+    transform: translateY(-50%);
+  }
+  .date .dnum::before { left: 0; }
+  .date .dnum::after  { right: 0; }
 
   /* ---------- Úvod ---------- */
   .hero {
-    position: relative;
-    overflow: hidden;
     min-height: 100vh;
     min-height: 100svh;
     display: flex;
@@ -78,105 +112,130 @@
     justify-content: center;
     text-align: center;
     padding: 3rem 1.4rem;
-    color: var(--cream);
-    background: radial-gradient(ellipse at 50% 18%, #365a45 0%, var(--velvet) 48%, var(--velvet-deep) 100%);
   }
-  /* Po nahrání fotky (fotky/hero.jpg) stačí přidat třídu "has-photo" do <header class="hero"> */
-  .hero.has-photo {
-    background:
-      linear-gradient(rgba(20,34,26,.50), rgba(20,34,26,.80)),
-      url('fotky/hero.jpg') center top / cover no-repeat;
-  }
-  .hero > * { position: relative; z-index: 1; }
-  .hero .small {
-    letter-spacing: .22em;
+  .kicker, .place {
+    font: 500 1rem/1.5 var(--font-text);
+    letter-spacing: .24em;
     text-transform: uppercase;
-    font-size: 1.05rem;
-    color: #e2dbc8;
+    color: var(--text);
   }
   .hero h1 {
-    font-size: clamp(3.4rem, 15vw, 7rem);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(3.2rem, 14vw, 6rem);
     line-height: 1.05;
-    margin: 1.2rem 0;
+    letter-spacing: .01em;
+    color: var(--text-strong);
+    margin: 1.2rem 0 1.6rem;
   }
-  .hero h1 em { color: var(--gold); font-style: italic; font-weight: 400; }
-  .hero .date { font-family: 'EB Garamond', serif; font-size: 2rem; line-height: 1.25; }
-  .hero .place { font-size: 1.3rem; color: #e9e3d3; margin-top: .3rem; }
+  .hero h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .hero .place { margin-top: 1.3rem; }
   .countdown {
-    margin-top: 1.2rem;
-    color: var(--gold);
-    font-family: 'EB Garamond', serif;
+    margin-top: 1.4rem;
+    font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.6rem;
+    font-weight: 500;
+    font-size: 1.7rem;
+    font-variant-numeric: lining-nums;
+    color: var(--text);
   }
   .hero .btn { margin-top: 2.2rem; }
-  .hero .btn.solid { background: var(--cream); color: var(--velvet-deep); border-color: var(--cream); }
-  .hero .btn.solid:hover, .hero .btn.solid:focus-visible { background: var(--gold); border-color: var(--gold); }
 
   /* ---------- Sekce ---------- */
-  section { padding: 4.5rem 1.4rem; text-align: center; }
-  section:nth-of-type(even) { background: var(--cream-2); }
-  .wrap { max-width: 640px; margin: 0 auto; }
-  section h2 { font-size: clamp(2.4rem, 8vw, 3.2rem); line-height: 1.15; color: var(--velvet); }
-  section h2::after {
+  section { padding: 3.2rem 1.4rem 4.2rem; text-align: center; }
+  /* svislá linka mezi sekcemi, jako na pozvánce */
+  section::before {
     content: '';
     display: block;
-    width: 64px; height: 2px;
-    background: var(--gold-dark);
-    margin: 1rem auto 2rem;
+    width: 1px;
+    height: 48px;
+    background: var(--muted);
+    margin: 0 auto 1.8rem;
   }
-  .fact { font-family: 'EB Garamond', serif; font-size: 1.9rem; line-height: 1.3; color: var(--velvet); margin-bottom: .2rem; }
-  .label { display: block; font-weight: 600; color: var(--velvet); margin-bottom: .1rem; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  section h2 {
+    font: 500 .95rem/1.4 var(--font-text);   /* 15 px, na pozvánce 13–14 px; větší kvůli starším hostům */
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.6rem;
+    padding-left: .18em;
+  }
+  .fact {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.25;
+    letter-spacing: .02em;
+    color: var(--text-strong);
+    margin: 1.4rem 0 .6rem;
+  }
+  .label {
+    display: block;
+    font: 600 .95rem/1.4 var(--font-text);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--text-strong);
+    margin-bottom: .15rem;
+  }
   .block { margin-bottom: 1.8rem; }
-  .note { color: var(--muted); font-size: 1.05rem; }
+  .note { font-size: 1.1rem; color: var(--text); }
 
   .faq { margin: 0; }
-  .faq dt { font-family: 'EB Garamond', serif; font-size: 1.6rem; line-height: 1.3; color: var(--velvet); font-weight: 500; }
-  .faq dd { margin: .2rem 0 1.9rem; }
+  .faq dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-strong);
+  }
+  .faq dd { margin: .35rem 0 1.9rem; }
   .faq dd:last-child { margin-bottom: 0; }
 
   footer {
     text-align: center;
-    padding: 3.5rem 1.4rem 4rem;
-    background: var(--velvet-deep);
-    color: #e2dbc8;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.6rem;
+    padding: 3rem 1.4rem 3.6rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-weight: 500;
     font-style: italic;
+    font-size: 1.8rem;
+    color: var(--text-strong);
   }
-  footer small { display: block; margin-top: .6rem; font-size: 1.05rem; letter-spacing: .12em; font-style: normal; color: var(--gold); }
+  footer small {
+    display: block;
+    margin-top: .7rem;
+    font: 500 .95rem/1.4 var(--font-text);
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
 
-  /* ---------- Animace ---------- */
-  .hero::before, .hero::after {
-    content: '';
-    position: absolute;
-    inset: -25%;
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(50px);
+  /* ---------- Místa pro kresby a fotku (zatím nepoužité, viz zakomentované <img> níže) ---------- */
+  .deco { display: block; height: auto; margin-left: auto; margin-right: auto; }
+  .deco-rings { width: 64px; margin-top: .4rem; margin-bottom: 1rem; }
+  .deco-house { width: min(100%, 440px); margin-top: 1.6rem; margin-bottom: 1.6rem; opacity: .55; }
+  .hero-photo {
+    display: block;
+    width: min(260px, 68vw);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    margin: 0 auto 1.8rem;
+    padding: 6px;
+    border: 1px solid var(--line);
   }
-  .hero::before {
-    background:
-      radial-gradient(ellipse 38% 28% at 22% 30%, rgba(150,190,160,.22), transparent 70%),
-      radial-gradient(ellipse 34% 24% at 78% 68%, rgba(255,255,255,.08), transparent 70%);
-    animation: drift1 38s ease-in-out infinite alternate;
-  }
-  .hero::after {
-    background:
-      radial-gradient(ellipse 30% 22% at 70% 25%, rgba(216,193,138,.14), transparent 70%),
-      radial-gradient(ellipse 36% 26% at 25% 75%, rgba(255,255,255,.07), transparent 70%);
-    animation: drift2 52s ease-in-out infinite alternate;
-  }
-  @keyframes drift1 { from { transform: translate3d(-5%,-3%,0) scale(1); }    to { transform: translate3d(6%,5%,0) scale(1.12); } }
-  @keyframes drift2 { from { transform: translate3d(5%,4%,0) scale(1.08); }   to { transform: translate3d(-6%,-4%,0) scale(1); } }
+
+  /* ---------- Animace (jemné vynoření z mlhy) ---------- */
   @keyframes mistIn {
-    from { opacity: 0; filter: blur(16px); transform: translateY(14px) scale(.98); }
+    from { opacity: 0; filter: blur(14px); transform: translateY(14px) scale(.98); }
     to   { opacity: 1; filter: blur(0);    transform: none; }
   }
-  .hero .small, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn {
+  .hero .kicker, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn {
     animation: mistIn 2.2s cubic-bezier(.2,.6,.2,1) both;
   }
-  .hero .small     { animation-delay: .3s; }
+  .hero .kicker    { animation-delay: .3s; }
   .hero h1         { animation-delay: .9s; }
   .hero .date      { animation-delay: 1.6s; }
   .hero .place     { animation-delay: 1.9s; }
@@ -192,12 +251,11 @@
   .js .reveal.in { opacity: 1; filter: blur(0); transform: none; }
 
   @media (max-width: 480px) {
-    .hero .small { letter-spacing: .14em; font-size: 1rem; }
+    .kicker, .place { letter-spacing: .18em; font-size: .95rem; }
     .btn { width: 100%; max-width: 360px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero::before, .hero::after { animation: none; }
-    .hero .small, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn { animation: none; }
+    .hero .kicker, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn { animation: none; }
     .js .reveal { opacity: 1; filter: none; transform: none; transition: none; }
     html { scroll-behavior: auto; }
   }
@@ -206,10 +264,16 @@
 <body>
 
 <header class="hero">
-  <div class="small">Zveme vás na naši svatbu</div>
+  <div class="kicker">Zveme vás na naši svatbu</div>
+  <!-- Fotka na výšku (po nahrání do fotky/hero.jpg odkomentujte):
+  <img class="hero-photo" src="fotky/hero.jpg" alt="Filip a Anička">
+  -->
   <h1>Filip <em>&amp;</em> Anička</h1>
-  <div class="date">sobota 3. července 2027</div>
-  <div class="place">Penzion Kůlna u Jedovnic</div>
+  <!-- Prstýnky (po nahrání do img/prstynky.png odkomentujte):
+  <img class="deco deco-rings" src="img/prstynky.png" alt="" width="64">
+  -->
+  <div class="date"><span class="dow">sobota</span><span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span></div>
+  <div class="place">Penzion Kůlna, Jedovnice</div>
   <div class="countdown" id="countdown"></div>
   <a class="btn solid" href="#formular">Potvrdit účast</a>
 </header>
@@ -217,10 +281,13 @@
 <section id="misto">
   <div class="wrap">
     <h2>Kdy a kde</h2>
-    <p class="fact">sobota 3. července 2027</p>
-    <p class="fact">Penzion Kůlna</p>
+    <div class="date"><span class="dow">sobota</span><span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span></div>
+    <p class="fact">Penzion Kůlna, Jedovnice</p>
     <p>Senetářov 114, 679 06<br>(u Jedovnic, Moravský kras)</p>
     <p class="note">Na místě je možnost parkování.</p>
+    <!-- Kresba penzionu (po nahrání do img/kulna.png odkomentujte):
+    <img class="deco deco-house" src="img/kulna.png" alt="Penzion Kůlna – kresba">
+    -->
     <div class="btn-row">
       <a class="btn solid" href="https://maps.app.goo.gl/NuivH8XHvcqM93v79" target="_blank" rel="noopener">Zobrazit na mapě</a>
     </div>
@@ -270,7 +337,7 @@
     <h2>Časté dotazy</h2>
     <dl class="faq">
       <dt>Jak se obléknout?</dt>
-      <dd>Dress code nemáme. Přijďte ve společenském oblečení, ve kterém se budete cítit dobře.</dd>
+      <dd>Přijďte ve společenském oblečení v jakékoli barvě, hlavně ať se v něm cítíte příjemně (tancovat se bude do noci).</dd>
 
       <dt>Jak se dostaneme domů?</dt>
       <dd>Rozvoz domů zajistíme. Kdo by chtěl zůstat přes noc, může přespat v penzionu, nebo ve vlastním stanu.</dd>
@@ -279,7 +346,7 @@
       <dd>Čtyřnozí kamarádi jsou vítáni.</dd>
 
       <dt>Co dárky?</dt>
-      <dd>Největší radost nám uděláte finančním příspěvkem.</dd>
+      <dd>Nejvíce nás potěší, když tento den strávíte s námi. Pokud byste nám přesto chtěli něco darovat, přivítáme spíše malý finanční dar než věcné dárky.</dd>
     </dl>
   </div>
 </section>
@@ -307,8 +374,11 @@
 </section>
 
 <footer>
+  <!-- Prstýnky do patičky (po nahrání odkomentujte):
+  <img class="deco deco-rings" src="img/prstynky.png" alt="" width="64">
+  -->
   Těšíme se na vás! ♥
-  <small>FILIP &amp; ANIČKA</small>
+  <small>Filip &amp; Anička</small>
 </footer>
 
 <script>
