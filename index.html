@@ -44,13 +44,14 @@
     /* ---------- Mezery: jedna základní + násobky ---------- */
     --gap:        clamp(1.25rem, 1rem + 1vw, 2rem);
     --gap-block:  calc(var(--gap) * 1.5);
-    --sec-pad:    clamp(3rem, 8vw, 5.5rem);
+    --sec-pad:    clamp(4.5rem, 11vw, 8rem);
+    --nav-h:      56px;
 
     --draw-opacity: .55;      /* sytost kresby Kůlny v pozadí úvodu (0–1) */
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav-h); }
   body {
     margin: 0;
     background: var(--bg);
@@ -131,7 +132,7 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    padding: clamp(1.5rem, 6vh, 5rem) 1.4rem clamp(2rem, 6vh, 3.5rem);
+    padding: calc(var(--nav-h) + clamp(1rem, 4vh, 3rem)) 1.4rem clamp(2rem, 6vh, 3.5rem);
     position: relative;
     isolation: isolate;
   }
@@ -194,14 +195,50 @@
     padding-left: .08em;
     text-wrap: balance;
   }
-  .block { margin: 0 auto var(--gap-block); max-width: 30rem; }
-  .block .eyebrow { margin-bottom: .35rem; }
 
-  /* 3 sloupce na širokém displeji (Ubytování) */
-  .cols { display: block; max-width: 960px; margin: 0 auto; }
-  /* Otázky: 2 sloupce na širokém displeji */
-  .faq { margin: 0; display: grid; gap: var(--gap-block) 4rem; }
-  .qa dd { margin: .4rem auto 0; max-width: 30rem; text-wrap: pretty; }
+  /* Ubytování a dotazy: jeden sloupec, řádky oddělené tenkou linkou */
+  .rows, .faq { max-width: 44rem; margin: 0 auto var(--gap-block); text-align: left; }
+  .row, .qa { padding: var(--gap) 0; border-top: 1px solid var(--line); }
+  .row:last-child, .qa:last-child { border-bottom: 1px solid var(--line); }
+  .row h3 { font-size: var(--fs-body); font-weight: 600; color: var(--text-strong); }
+  .row p, .qa dd { margin: .3rem 0 0; max-width: none; text-wrap: pretty; }
+  .qa dt { font-weight: 600; color: var(--text-strong); }
+  .qa dd { margin: .3rem 0 0; }
+  .faq { margin-bottom: 0; }
+  .lead { max-width: 40rem; }
+
+  /* Fotky */
+  .gallery { display: grid; gap: var(--gap); grid-template-columns: 1fr; margin-top: var(--gap-block); }
+  .gallery figure { margin: 0; }
+  .gallery img { display: block; width: 100%; height: auto; border-radius: 2px; }
+  @media (min-width: 600px) { .gallery { grid-template-columns: 1fr 1fr; } }
+
+  /* Menu (fixní lišta nahoře) */
+  .menu {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    background: rgba(251, 248, 243, .95);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .menu ul { list-style: none; margin: 0; padding: 0; }
+  .menu a, .menu-btn {
+    display: flex; align-items: center; justify-content: center;
+    min-height: var(--nav-h);
+    font: 500 var(--fs-btn)/1.2 var(--font);
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-strong); text-decoration: none;
+  }
+  .menu a:hover, .menu a:focus-visible { color: var(--accent-hover); }
+  .menu-btn { display: none; width: 100%; background: none; border: 0; cursor: pointer; }
+  .js .menu-btn { display: flex; }
+  .js .menu ul { display: none; }
+  .js .menu.open ul { display: block; border-top: 1px solid var(--line); }
+  .menu li + li a { border-top: 1px solid var(--line); }
+  @media (min-width: 820px) {
+    .js .menu-btn { display: none; }
+    .js .menu ul, .menu ul { display: flex; justify-content: center; gap: clamp(1.4rem, 3.5vw, 3rem); }
+    .menu li + li a { border-top: 0; }
+  }
 
   /* Mapa cesty */
   .map { margin: var(--gap) auto 0; max-width: 900px; }
@@ -240,12 +277,6 @@
   @media (min-width: 600px) {
     .eyebrow, footer small { letter-spacing: .16em; }
   }
-  @media (min-width: 820px) {
-    .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; align-items: start; }
-    .cols .block { margin-bottom: 0; }
-    .faq { grid-template-columns: 1fr 1fr; }
-  }
-
   /* Široký displej na šířku: text vlevo, kresba Kůlny vpravo (aby se nekryly) */
   @media (min-width: 900px) and (min-aspect-ratio: 5/4) {
     .hero { align-items: flex-start; padding-left: clamp(2rem, 5vw, 6rem); }
@@ -294,6 +325,18 @@
 </head>
 <body>
 
+<nav class="menu" aria-label="Menu">
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-list">Menu</button>
+  <ul id="menu-list">
+    <li><a href="#misto">Kdy a&nbsp;kde</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#ubytovani">Ubytování</a></li>
+    <li><a href="#formular">Účast</a></li>
+    <li><a href="#otazky">Dotazy</a></li>
+    <li id="menu-fotky" hidden><a href="#fotky">Fotky</a></li>
+  </ul>
+</nav>
+
 <header class="hero">
   <div class="hero-main">
     <div class="eyebrow kicker">Zveme vás na naši svatbu</div>
@@ -318,7 +361,7 @@
     <p class="eyebrow">Sobota 3.&nbsp;července&nbsp;2027</p>
     <p>Penzion Kůlna, Senetářov&nbsp;114, 679&nbsp;06 (u&nbsp;Jedovnic)</p>
     <p>V&nbsp;navigaci zadejte Senetářov&nbsp;114.</p>
-    <p>Na místě je možnost parkování.</p>
+    <p>Parkovat se bude na louce.</p>
 
     <figure class="map">
       <h3 class="eyebrow">Jak se k&nbsp;nám dostanete</h3>
@@ -326,7 +369,7 @@
         <img src="img/jak-se-dostat.jpg" width="1287" height="832" loading="lazy" decoding="async"
              alt="Nakreslená mapa cesty z&nbsp;centra Jedovnic kolem rybníka Olšovec k&nbsp;penzionu Kůlna. Za zákazem vjezdu pokračujte rovně lesní cestou.">
       </a>
-      <figcaption>Z&nbsp;centra Jedovnic pokračujte kolem rybníka Olšovec. Zákaz vjezdu projeďte a&nbsp;pokračujte rovně lesní cestou. Klepnutím mapu zvětšíte.</figcaption>
+      <figcaption>Z&nbsp;centra Jedovnic pokračujte kolem rybníka Olšovec. Zákaz vjezdu se vás netýká, pokud jedete na Kůlnu – projeďte a&nbsp;pokračujte rovně lesní cestou. Klepnutím mapu zvětšíte.</figcaption>
     </figure>
 
     <div class="btn-row">
@@ -355,10 +398,11 @@
 <section id="ubytovani">
   <div class="wrap">
     <h2>Ubytování</h2>
-    <div class="cols">
-      <div class="block"><h3 class="eyebrow">Spaní v&nbsp;penzionu</h3><p>Pro rodinu je spaní zajištěno v&nbsp;rámci ubytování v&nbsp;penzionu.</p></div>
-      <div class="block"><h3 class="eyebrow">Spaní ve stanu</h3><p>Můžete si přivézt a&nbsp;postavit vlastní stan.</p></div>
-      <div class="block"><h3 class="eyebrow">Snídaně</h3><p>Snídani si můžete objednat předem po domluvě za příplatek. Dejte nám prosím včas vědět.</p></div>
+    <p class="lead">Spaní v&nbsp;penzionu pro vás zajistíme a&nbsp;uhradíme my. Pokud ho chcete využít, dejte nám prosím včas vědět, ať vám stihneme rezervovat pokoje.</p>
+    <div class="rows">
+      <div class="row"><h3>Spaní v&nbsp;penzionu</h3><p>Pokoje zajistíme a&nbsp;zaplatíme my. Stačí nám ve formuláři napsat, že o&nbsp;spaní stojíte.</p></div>
+      <div class="row"><h3>Spaní ve stanu</h3><p>Můžete si přivézt vlastní stan. Stany budou stát venku na trávě u&nbsp;penzionu, k&nbsp;dispozici je WC. Se sprchou ještě domlouváme.</p></div>
+      <div class="row"><h3>Snídaně</h3><p>Snídani si můžete objednat předem po domluvě za příplatek. Dejte nám prosím včas vědět.</p></div>
     </div>
     <p>Penzion leží v&nbsp;tiché krajině Moravského krasu. Více o&nbsp;místě najdete na <a href="https://kulna-jedovnice.cz/" target="_blank" rel="noopener">kulna-jedovnice.cz</a>.</p>
   </div>
@@ -367,7 +411,7 @@
 <section id="formular">
   <div class="wrap">
     <h2>Potvrzení účasti</h2>
-    <p>Dejte nám prosím včas vědět, zda dorazíte. Ve formuláři vyplníte také stravovací požadavky, zájem o&nbsp;ubytování a&nbsp;snídani. A&nbsp;napište nám písničku, na kterou si rádi zatančíte.</p>
+    <p>Dejte nám prosím včas vědět, zda dorazíte. Ve formuláři vyplníte také stravovací požadavky, zájem o&nbsp;ubytování a&nbsp;snídani.</p>
     <div class="btn-row">
       <a class="btn solid" data-link="form" target="_blank" rel="noopener" hidden>Vyplnit formulář</a>
     </div>
@@ -380,44 +424,36 @@
     <h2>Časté dotazy</h2>
     <dl class="faq">
       <div class="qa">
-        <dt class="eyebrow">Jak se obléknout?</dt>
+        <dt>Jak se obléknout?</dt>
         <dd>Přijďte ve společenském oblečení v&nbsp;jakékoli barvě, hlavně ať se v&nbsp;něm cítíte příjemně (tancovat se bude do noci).</dd>
       </div>
       <div class="qa">
-        <dt class="eyebrow">Jak se dostaneme domů?</dt>
-        <dd>Rozvoz domů zajistíme. Kdo by chtěl zůstat přes noc, může si postavit stan.</dd>
+        <dt>Co když bude pršet?</dt>
+        <dd>Vše se bude konat na místě i&nbsp;za deště.</dd>
       </div>
       <div class="qa">
-        <dt class="eyebrow">Můžeme přijít se zvířátkem?</dt>
+        <dt>Jak se dostaneme domů?</dt>
+        <dd>Rozvoz domů zajistí naši svědci, podrobnosti doplníme. Kdo by chtěl zůstat přes noc, může přespat v&nbsp;penzionu nebo ve stanu.</dd>
+      </div>
+      <div class="qa">
+        <dt>Můžeme přijít se zvířátkem?</dt>
         <dd>Čtyřnozí kamarádi jsou vítáni.</dd>
       </div>
       <div class="qa">
-        <dt class="eyebrow">Co dárky?</dt>
+        <dt>Co dárky?</dt>
         <dd>Nejvíce nás potěší, když tento den strávíte s&nbsp;námi. Pokud byste nám přesto chtěli něco darovat, přivítáme spíše malý finanční dar než věcné dárky.</dd>
       </div>
     </dl>
   </div>
 </section>
 
-<section id="hudba">
+<!-- Fotky: odkomentujte hidden na sekci i na položce menu (#menu-fotky), až nahrajete snímky do img/foto/ -->
+<section id="fotky" hidden>
   <div class="wrap">
-    <h2>Hudba</h2>
-    <p>Večer nám zahraje kapela a&nbsp;potom bude společná zábava, na které si každý zatančí na svou písničku. Přidejte do našeho playlistu to, co byste rádi slyšeli.</p>
-    <div class="btn-row">
-      <a class="btn solid" data-link="playlist" target="_blank" rel="noopener" hidden>Přidat písničku</a>
+    <h2>Naše fotky</h2>
+    <div class="gallery">
+      <!-- <figure><img src="img/foto/01.jpg" alt="" loading="lazy" decoding="async"></figure> -->
     </div>
-    <p class="soon" data-soon="playlist">Playlist připravujeme, odkaz se tu brzy objeví.</p>
-  </div>
-</section>
-
-<section id="album">
-  <div class="wrap">
-    <h2>Společné album</h2>
-    <p>Po svatbě budeme rádi za všechny vaše fotky a&nbsp;videa. Nahrát je půjde z&nbsp;telefonu přes odkaz níže.</p>
-    <div class="btn-row">
-      <a class="btn solid" data-link="album" target="_blank" rel="noopener" hidden>Otevřít album</a>
-    </div>
-    <p class="soon" data-soon="album">Odkaz na album se tu objeví před svatbou.</p>
   </div>
 </section>
 
@@ -430,9 +466,7 @@
 <script>
   /* Sem vložte odkazy, tlačítka se pak sama zobrazí. */
   var LINKS = {
-    form:     '',   // odkaz na Google Formulář
-    playlist: '',   // odkaz na společný Spotify playlist
-    album:    ''    // odkaz na sdílené album (Google Fotky)
+    form: ''   // odkaz na Google Formulář
   };
 
   (function () {
@@ -444,6 +478,16 @@
       a.hidden = false;
       var soon = document.querySelector('[data-soon="' + key + '"]');
       if (soon) soon.hidden = true;
+    });
+
+    // Menu na mobilu
+    var menu = document.querySelector('.menu'), btn = document.querySelector('.menu-btn');
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); });
     });
 
     // Odpočet ve dnech
