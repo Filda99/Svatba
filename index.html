@@ -214,10 +214,11 @@
     color: var(--accent);
   }
 
-  /* ---------- Místa pro kresby a fotku (zatím nepoužité, viz zakomentované <img> níže) ---------- */
+  /* ---------- Kresby a fotka ---------- */
   .deco { display: block; height: auto; margin-left: auto; margin-right: auto; }
-  .deco-rings { width: 64px; margin-top: .4rem; margin-bottom: 1rem; }
-  .deco-house { width: min(100%, 440px); margin-top: 1.6rem; margin-bottom: 1.6rem; opacity: .55; }
+  .deco-rings { width: 96px; margin-top: -.2rem; margin-bottom: 1.4rem; }
+  .deco-rings-foot { margin-top: 0; margin-bottom: 1.1rem; }
+  .deco-house { width: min(100%, 360px); margin-top: 1.4rem; margin-bottom: .6rem; opacity: .8; }
   .hero-photo {
     display: block;
     width: min(260px, 68vw);
@@ -270,9 +271,7 @@
   <img class="hero-photo" src="fotky/hero.jpg" alt="Filip a Anička">
   -->
   <h1>Filip <em>&amp;</em> Anička</h1>
-  <!-- Prstýnky (po nahrání do img/prstynky.png odkomentujte):
-  <img class="deco deco-rings" src="img/prstynky.png" alt="" width="64">
-  -->
+  <img class="deco deco-rings" src="img/prstynky.png" alt="" width="96" height="77">
   <div class="date"><span class="dow">sobota</span><span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span></div>
   <div class="place">Penzion Kůlna, Jedovnice</div>
   <div class="countdown" id="countdown"></div>
@@ -286,9 +285,7 @@
     <p class="fact">Penzion Kůlna, Jedovnice</p>
     <p>Senetářov 114, 679 06<br>(u Jedovnic, Moravský kras)</p>
     <p class="note">Na místě je možnost parkování.</p>
-    <!-- Kresba penzionu (po nahrání do img/kulna.png odkomentujte):
-    <img class="deco deco-house" src="img/kulna.png" alt="Penzion Kůlna – kresba">
-    -->
+    <img class="deco deco-house" src="img/kulna.png" alt="Kresba penzionu Kůlna" width="360" height="482" loading="lazy" decoding="async">
     <div class="btn-row">
       <a class="btn solid" href="https://maps.app.goo.gl/NuivH8XHvcqM93v79" target="_blank" rel="noopener">Zobrazit na mapě</a>
     </div>
@@ -375,9 +372,7 @@
 </section>
 
 <footer>
-  <!-- Prstýnky do patičky (po nahrání odkomentujte):
-  <img class="deco deco-rings" src="img/prstynky.png" alt="" width="64">
-  -->
+  <img class="deco deco-rings deco-rings-foot" src="img/prstynky.png" alt="" width="96" height="77" loading="lazy" decoding="async">
   Těšíme se na vás! ♥
   <small>Filip &amp; Anička</small>
 </footer>
