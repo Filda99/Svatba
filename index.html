@@ -12,6 +12,7 @@
 <meta property="og:description" content="Zveme vás na naši svatbu. Všechny informace najdete na našich stránkách.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Jediný font celého webu: EB Garamond. Cormorant Garamond (kurzíva) jen pro ozdobné „&“. -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
@@ -25,9 +26,18 @@
     --line:         #E2DCD2;  /* jemné oddělovače, rámečky */
     --muted:        #B9B1A6;  /* linky a tlumené prvky (ne pro text) */
 
-    --font-display: 'EB Garamond', Georgia, 'Times New Roman', serif;   /* jména, datum, nadpisy (háčky sedí blízko písmene) */
-    --font-amp:     'Cormorant Garamond', 'EB Garamond', Georgia, serif; /* jen ozdobné „&“ */
-    --font-text:    'EB Garamond', Georgia, 'Times New Roman', serif;
+    --font:     'EB Garamond', Georgia, 'Times New Roman', serif;
+    --font-amp: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;   /* jen ozdobné „&“ */
+
+    /* ---------- Stupnice písma (roste s šířkou displeje) ---------- */
+    --fs-body:  clamp(1.25rem, 1.1rem + .55vw, 1.5rem);      /* běžný text   20–24 px */
+    --fs-h2:    clamp(1.7rem, 1.2rem + 2.2vw, 2.8rem);       /* nadpisy sekcí 27–45 px */
+    --fs-h3:    clamp(1.25rem, 1.1rem + .6vw, 1.55rem);      /* otázky, popisky */
+    --fs-caps:  clamp(1rem, .9rem + .55vw, 1.4rem);          /* SOBOTA, místo, drobné verzálky */
+    --fs-date:  clamp(2.4rem, 1.5rem + 4vw, 4rem);           /* datum */
+    --fs-note:  clamp(1.1rem, 1rem + .4vw, 1.3rem);          /* poznámky */
+
+    --draw-opacity: .75;      /* sytost kresby Kůlny v pozadí úvodu (0–1) */
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
@@ -36,14 +46,14 @@
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-text);
+    font-family: var(--font);
     font-weight: 400;
-    font-size: 1.3rem;          /* EB Garamond má menší x-výšku, proto víc: dobře čitelné i pro starší hosty */
+    font-size: var(--fs-body);
     line-height: 1.55;
     overflow-x: hidden;
   }
   h1, h2 { margin: 0; font-weight: 500; }
-  p { margin: 0 0 1rem; }
+  p { margin: 0 auto 1rem; max-width: 46rem; }
   strong { font-weight: 600; color: var(--text-strong); }
 
   a { color: var(--accent); text-underline-offset: .2em; text-decoration-thickness: 1px; }
@@ -55,13 +65,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 54px;
-    padding: 0 2rem;
+    min-height: 56px;
+    padding: 0 2.2rem;
     border: 1px solid var(--accent);
     border-radius: 2px;
     background: transparent;
     color: var(--accent);
-    font: 500 1rem/1.2 var(--font-text);
+    font: 500 1.05rem/1.2 var(--font);
     letter-spacing: .14em;
     text-transform: uppercase;
     text-decoration: none;
@@ -73,35 +83,27 @@
   .btn.solid:hover, .btn.solid:focus-visible { background: var(--accent-hover); border-color: var(--accent-hover); }
   .btn-row { display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 1.6rem; }
 
-  /* ---------- Datum: SOBOTA / │ 03 · 07 · 2027 │ ---------- */
-  .date { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
-  .date .dow {
-    font: 500 .95rem/1 var(--font-text);
-    letter-spacing: .24em;
+  /* ---------- Společné prvky: verzálky, datum, krátká čárka ---------- */
+  .caps {
+    font-weight: 500;
+    font-size: var(--fs-caps);
+    line-height: 1.5;
+    letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--text-strong);
-    padding-left: .24em;       /* vyrovná poslední mezeru prostrkání */
+    text-wrap: balance;
   }
-  .date .dnum {
-    position: relative;
-    padding: 0 1.2rem;
-    font: 500 clamp(1.9rem, 8vw, 2.6rem)/1.2 var(--font-display);
-    font-variant-numeric: lining-nums;   /* klasické číslice, ne „staročíslice“ (dobře čitelné datum) */
-    letter-spacing: .05em;
-    color: var(--accent);
+  .date-block { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
+  .dnum {
+    font-weight: 500;
+    font-size: var(--fs-date);
+    line-height: 1.1;
+    letter-spacing: .06em;
+    font-variant-numeric: lining-nums;
+    color: var(--accent-hover);
     white-space: nowrap;
   }
-  .date .dnum::before, .date .dnum::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 1px;
-    height: 1.5em;
-    background: var(--accent);
-    transform: translateY(-50%);
-  }
-  .date .dnum::before { left: 0; }
-  .date .dnum::after  { right: 0; }
+  .rule { display: block; width: 56px; height: 1px; background: var(--accent); margin: 1.6rem auto 0; }
 
   /* ---------- Úvod ---------- */
   .hero {
@@ -109,41 +111,58 @@
     min-height: 100svh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    padding: 3rem 1.4rem;
+    padding: clamp(2.5rem, 8vh, 5rem) 1.4rem clamp(2rem, 6vh, 3.5rem);
+    position: relative;
+    isolation: isolate;
   }
-  .kicker, .place {
-    font: 500 1rem/1.5 var(--font-text);
-    letter-spacing: .24em;
+  /* Kresba Kůlny v pozadí úvodu (img/kulna.png), jemná, aby text zůstal čitelný */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url('img/kulna.png') center bottom / contain no-repeat;
+    opacity: var(--draw-opacity);
+    pointer-events: none;
+    animation: drawIn 3.5s ease .2s both;
+  }
+  .hero-main { flex: 1; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .hero-bottom { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; width: 100%; }
+
+  .kicker {
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1rem + .9vw, 1.7rem);
+    line-height: 1.6;
+    letter-spacing: .2em;
     text-transform: uppercase;
-    color: var(--text);
+    color: var(--text-strong);
+    text-wrap: balance;
   }
   .hero h1 {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(3.2rem, 14vw, 6rem);
+    font-size: clamp(3.4rem, 14vw, 7.5rem);
     line-height: 1.05;
     letter-spacing: .01em;
     color: var(--text-strong);
-    margin: 1.2rem 0 1.6rem;
+    margin: 1.2rem 0 1.4rem;
   }
   .hero h1 em { font-family: var(--font-amp); font-style: italic; font-weight: 400; color: var(--accent); }
-  .hero .place { margin-top: 1.3rem; }
+  .deco { display: block; height: auto; margin-left: auto; margin-right: auto; }
+  .deco-rings { width: clamp(96px, 12vw, 130px); margin-top: -.2rem; margin-bottom: 1.5rem; }
+  .deco-rings-foot { margin-top: 0; margin-bottom: 1.1rem; }
+
   .countdown {
-    margin-top: 1.4rem;
-    font-family: var(--font-text);
     font-style: italic;
     font-weight: 400;
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 1.2rem + .9vw, 1.9rem);
     font-variant-numeric: lining-nums;
-    color: var(--text);
+    color: var(--text-strong);
   }
-  .hero .btn { margin-top: 2.2rem; }
 
   /* ---------- Sekce ---------- */
-  section { padding: 3.2rem 1.4rem 4.2rem; text-align: center; }
+  section { padding: clamp(2.8rem, 6vw, 4.5rem) clamp(1.4rem, 5vw, 3rem) clamp(3.5rem, 8vw, 6rem); text-align: center; }
   /* svislá linka mezi sekcemi, jako na pozvánce */
   section::before {
     content: '';
@@ -153,96 +172,100 @@
     background: var(--muted);
     margin: 0 auto 1.8rem;
   }
-  .wrap { max-width: 640px; margin: 0 auto; }
+  .wrap { max-width: 920px; margin: 0 auto; }
   section h2 {
-    font: 500 .95rem/1.4 var(--font-text);   /* 15 px, na pozvánce 13–14 px; větší kvůli starším hostům */
-    letter-spacing: .18em;
+    font-size: var(--fs-h2);
+    line-height: 1.2;
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 1.6rem;
-    padding-left: .18em;
-  }
-  .fact {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 2rem;
-    line-height: 1.25;
-    letter-spacing: .02em;
-    color: var(--text-strong);
-    margin: 1.4rem 0 .6rem;
+    margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+    padding-left: .1em;
+    text-wrap: balance;
   }
   .label {
     display: block;
-    font: 600 .95rem/1.4 var(--font-text);
-    letter-spacing: .14em;
+    font-weight: 600;
+    font-size: var(--fs-h3);
+    line-height: 1.35;
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--text-strong);
-    margin-bottom: .15rem;
+    margin-bottom: .2rem;
   }
-  .block { margin-bottom: 1.8rem; }
-  .note { font-size: 1.1rem; color: var(--text); }
+  .block { margin: 0 auto 1.8rem; max-width: 30rem; }
+  .note { font-size: var(--fs-note); color: var(--text); }
 
-  .faq { margin: 0; }
-  .faq dt {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 1.3rem;
-    line-height: 1.3;
+  /* 3 sloupce na širokém displeji (Ubytování) */
+  .cols { display: block; }
+  /* Otázky: 2 sloupce na širokém displeji */
+  .faq { margin: 0; display: grid; gap: 2rem 4rem; }
+  .qa dt {
+    font-weight: 600;
+    font-size: var(--fs-h3);
+    line-height: 1.35;
     letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--text-strong);
   }
-  .faq dd { margin: .35rem 0 1.9rem; }
-  .faq dd:last-child { margin-bottom: 0; }
+  .qa dd { margin: .4rem auto 0; max-width: 30rem; }
+
+  /* Mapa cesty */
+  .map { margin: 2rem auto 0; max-width: 900px; }
+  .map a { display: block; border: 1px solid var(--line); padding: 6px; background: var(--bg); }
+  .map img { display: block; width: 100%; height: auto; }
+  .map figcaption { margin-top: .9rem; }
 
   footer {
     text-align: center;
     padding: 3rem 1.4rem 3.6rem;
     border-top: 1px solid var(--line);
-    font-family: var(--font-text);
-    font-weight: 400;
     font-style: italic;
-    font-size: 1.7rem;
+    font-weight: 400;
+    font-size: clamp(1.7rem, 1.4rem + 1.2vw, 2.2rem);
     color: var(--text-strong);
   }
   footer small {
     display: block;
     margin-top: .7rem;
-    font: 500 .95rem/1.4 var(--font-text);
+    font-style: normal;
+    font-weight: 500;
+    font-size: var(--fs-caps);
     letter-spacing: .24em;
     text-transform: uppercase;
     color: var(--accent);
   }
 
-  /* ---------- Kresby a fotka ---------- */
-  .deco { display: block; height: auto; margin-left: auto; margin-right: auto; }
-  .deco-rings { width: 96px; margin-top: -.2rem; margin-bottom: 1.4rem; }
-  .deco-rings-foot { margin-top: 0; margin-bottom: 1.1rem; }
-  .deco-house { width: min(100%, 360px); margin-top: 1.4rem; margin-bottom: .6rem; opacity: .8; }
-  .hero-photo {
-    display: block;
-    width: min(260px, 68vw);
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    margin: 0 auto 1.8rem;
-    padding: 6px;
-    border: 1px solid var(--line);
+  @media (min-width: 820px) {
+    .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; align-items: start; }
+    .cols .block { margin-bottom: 0; }
+    .faq { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Široký displej na šířku: text vlevo, kresba Kůlny vpravo (aby se nekryly) */
+  @media (min-width: 900px) and (min-aspect-ratio: 5/4) {
+    .hero { align-items: flex-start; padding-left: clamp(2rem, 5vw, 6rem); }
+    .hero-main, .hero-bottom { width: 54%; }
+    .hero::before { background-position: right clamp(1rem, 5vw, 6rem) bottom; background-size: auto 94%; }
+    .hero h1 { font-size: clamp(3.4rem, 7vw, 6.5rem); }
   }
 
   /* ---------- Animace (jemné vynoření z mlhy) ---------- */
+  @keyframes drawIn { from { opacity: 0; } to { opacity: var(--draw-opacity); } }
   @keyframes mistIn {
     from { opacity: 0; filter: blur(14px); transform: translateY(14px) scale(.98); }
     to   { opacity: 1; filter: blur(0);    transform: none; }
   }
-  .hero .kicker, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn {
+  .hero .kicker, .hero h1, .hero .deco-rings, .hero .date-block, .hero .rule, .hero .countdown, .hero .btn {
     animation: mistIn 2.2s cubic-bezier(.2,.6,.2,1) both;
   }
-  .hero .kicker    { animation-delay: .3s; }
-  .hero h1         { animation-delay: .9s; }
-  .hero .date      { animation-delay: 1.6s; }
-  .hero .place     { animation-delay: 1.9s; }
-  .hero .countdown { animation-delay: 2.2s; }
-  .hero .btn       { animation-delay: 2.6s; }
+  .hero .kicker      { animation-delay: .3s; }
+  .hero h1           { animation-delay: .8s; }
+  .hero .deco-rings  { animation-delay: 1.2s; }
+  .hero .date-block  { animation-delay: 1.6s; }
+  .hero .rule        { animation-delay: 2s; }
+  .hero .countdown   { animation-delay: 2.3s; }
+  .hero .btn         { animation-delay: 2.6s; }
 
   .js .reveal {
     opacity: 0;
@@ -253,11 +276,13 @@
   .js .reveal.in { opacity: 1; filter: blur(0); transform: none; }
 
   @media (max-width: 480px) {
-    .kicker, .place { letter-spacing: .18em; font-size: .95rem; }
-    .btn { width: 100%; max-width: 360px; }
+    .btn { width: 100%; max-width: 380px; }
+    .caps { letter-spacing: .16em; }
+    .kicker { letter-spacing: .16em; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero .kicker, .hero h1, .hero .date, .hero .place, .hero .countdown, .hero .btn { animation: none; }
+    .hero::before { animation: none; }
+    .hero .kicker, .hero h1, .hero .deco-rings, .hero .date-block, .hero .rule, .hero .countdown, .hero .btn { animation: none; }
     .js .reveal { opacity: 1; filter: none; transform: none; transition: none; }
     html { scroll-behavior: auto; }
   }
@@ -266,31 +291,49 @@
 <body>
 
 <header class="hero">
-  <div class="kicker">Zveme vás na naši svatbu</div>
-  <!-- Fotka na výšku (po nahrání do fotky/hero.jpg odkomentujte):
-  <img class="hero-photo" src="fotky/hero.jpg" alt="Filip a Anička">
-  -->
-  <h1>Filip <em>&amp;</em> Anička</h1>
-  <img class="deco deco-rings" src="img/prstynky.png" alt="" width="96" height="77">
-  <div class="date"><span class="dow">sobota</span><span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span></div>
-  <div class="place">Penzion Kůlna, Jedovnice</div>
-  <div class="countdown" id="countdown"></div>
-  <a class="btn solid" href="#formular">Potvrdit účast</a>
+  <div class="hero-main">
+    <div class="kicker">Zveme vás na naši svatbu</div>
+    <h1>Filip <em>&amp;</em> Anička</h1>
+    <img class="deco deco-rings" src="img/prstynky.png" alt="" width="96" height="77">
+    <div class="date-block">
+      <span class="caps">sobota</span>
+      <span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span>
+      <span class="caps">Penzion Kůlna, Jedovnice</span>
+    </div>
+    <span class="rule" aria-hidden="true"></span>
+  </div>
+  <div class="hero-bottom">
+    <div class="countdown" id="countdown"></div>
+    <a class="btn solid" href="#formular">Potvrdit účast</a>
+  </div>
 </header>
 
 <section id="misto">
   <div class="wrap">
     <h2>Kdy a kde</h2>
-    <div class="date"><span class="dow">sobota</span><span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span></div>
-    <p class="fact">Penzion Kůlna, Jedovnice</p>
-    <p>Senetářov 114, 679 06<br>(u Jedovnic, Moravský kras)</p>
+    <div class="date-block">
+      <span class="caps">sobota</span>
+      <span class="dnum">03&nbsp;·&nbsp;07&nbsp;·&nbsp;2027</span>
+      <span class="caps">Penzion Kůlna, Jedovnice</span>
+    </div>
+    <span class="rule" aria-hidden="true"></span>
+    <p style="margin-top:1.8rem">Senetářov 114, 679 06<br>(u Jedovnic, Moravský kras)</p>
     <p class="note">Na místě je možnost parkování.</p>
-    <img class="deco deco-house" src="img/kulna.png" alt="Kresba penzionu Kůlna" width="360" height="482" loading="lazy" decoding="async">
+
+    <figure class="map">
+      <span class="label" style="margin-bottom:.8rem">Jak se k nám dostanete</span>
+      <a href="img/jak-se-dostat.jpg" target="_blank" rel="noopener" aria-label="Zvětšit mapu cesty">
+        <img src="img/jak-se-dostat.jpg" width="1287" height="832" loading="lazy" decoding="async"
+             alt="Nakreslená mapa cesty z centra Jedovnic kolem rybníka Olšovec k penzionu Kůlna. Za zákazem vjezdu pokračujte rovně lesní cestou.">
+      </a>
+      <figcaption class="note">Z centra Jedovnic pokračujte kolem rybníka Olšovec. Zákaz vjezdu projeďte a pokračujte rovně lesní cestou. Klepnutím mapu zvětšíte.</figcaption>
+    </figure>
+
     <div class="btn-row">
       <a class="btn solid" href="https://maps.app.goo.gl/NuivH8XHvcqM93v79" target="_blank" rel="noopener">Zobrazit na mapě</a>
     </div>
-    <p class="block" style="margin-top:2.2rem"><span class="label">Přidat do kalendáře</span></p>
-    <div class="btn-row" style="margin-top:-.8rem">
+    <p style="margin-top:2.2rem"><span class="label">Přidat do kalendáře</span></p>
+    <div class="btn-row" style="margin-top:-.4rem">
       <a class="btn" id="cal-google" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Svatba+Filipa+a+Ani%C4%8Dky&amp;dates=20270703%2F20270704&amp;location=Penzion+K%C5%AFlna%2C+Senet%C3%A1%C5%99ov+114%2C+679+06&amp;details=Svatba+Filipa+a+Ani%C4%8Dky.+V%C3%ADce+informac%C3%AD%3A+https%3A%2F%2Ffilipanicka.cz" target="_blank" rel="noopener">Google kalendář</a>
       <a class="btn" href="svatba.ics" download="svatba-filip-anicka.ics">Apple / Outlook</a>
     </div>
@@ -312,10 +355,12 @@
 <section id="ubytovani">
   <div class="wrap">
     <h2>Ubytování</h2>
-    <p class="block"><span class="label">Rodina</span>Pro rodinu je spaní zajištěno v rámci ubytování v penzionu.</p>
-    <p class="block"><span class="label">Kamarádi</span>Můžete si přivézt a postavit vlastní stan.</p>
-    <p class="block"><span class="label">Snídaně</span>Snídani je možné objednat po domluvě za příplatek. Musí se objednat předem, dejte nám proto včas vědět.</p>
-    <p class="note">Penzion leží v tiché krajině Moravského krasu. Více o místě najdete na <a href="https://kulna-jedovnice.cz/" target="_blank" rel="noopener">kulna-jedovnice.cz</a>.</p>
+    <div class="cols">
+      <p class="block"><span class="label">Rodina</span>Pro rodinu je spaní zajištěno v rámci ubytování v penzionu.</p>
+      <p class="block"><span class="label">Kamarádi</span>Můžete si přivézt a postavit vlastní stan.</p>
+      <p class="block"><span class="label">Snídaně</span>Snídani je možné objednat po domluvě za příplatek. Musí se objednat předem, dejte nám proto včas vědět.</p>
+    </div>
+    <p class="note" style="margin-top:2rem">Penzion leží v tiché krajině Moravského krasu. Více o místě najdete na <a href="https://kulna-jedovnice.cz/" target="_blank" rel="noopener">kulna-jedovnice.cz</a>.</p>
   </div>
 </section>
 
@@ -334,17 +379,22 @@
   <div class="wrap">
     <h2>Časté dotazy</h2>
     <dl class="faq">
-      <dt>Jak se obléknout?</dt>
-      <dd>Přijďte ve společenském oblečení v jakékoli barvě, hlavně ať se v něm cítíte příjemně (tancovat se bude do noci).</dd>
-
-      <dt>Jak se dostaneme domů?</dt>
-      <dd>Rozvoz domů zajistíme. Kdo by chtěl zůstat přes noc, může přespat v penzionu, nebo ve vlastním stanu.</dd>
-
-      <dt>Můžeme přijít se zvířátkem?</dt>
-      <dd>Čtyřnozí kamarádi jsou vítáni.</dd>
-
-      <dt>Co dárky?</dt>
-      <dd>Nejvíce nás potěší, když tento den strávíte s námi. Pokud byste nám přesto chtěli něco darovat, přivítáme spíše malý finanční dar než věcné dárky.</dd>
+      <div class="qa">
+        <dt>Jak se obléknout?</dt>
+        <dd>Přijďte ve společenském oblečení v jakékoli barvě, hlavně ať se v něm cítíte příjemně (tancovat se bude do noci).</dd>
+      </div>
+      <div class="qa">
+        <dt>Jak se dostaneme domů?</dt>
+        <dd>Rozvoz domů zajistíme. Kdo by chtěl zůstat přes noc, může přespat v penzionu, nebo ve vlastním stanu.</dd>
+      </div>
+      <div class="qa">
+        <dt>Můžeme přijít se zvířátkem?</dt>
+        <dd>Čtyřnozí kamarádi jsou vítáni.</dd>
+      </div>
+      <div class="qa">
+        <dt>Co dárky?</dt>
+        <dd>Nejvíce nás potěší, když tento den strávíte s námi. Pokud byste nám přesto chtěli něco darovat, přivítáme spíše malý finanční dar než věcné dárky.</dd>
+      </div>
     </dl>
   </div>
 </section>
