@@ -172,12 +172,12 @@
 
   /* ---------- Sekce ---------- */
   section { padding: var(--sec-pad) clamp(1.4rem, 5vw, 3rem) 0; text-align: center; }
-  /* krátká svislá linka mezi sekcemi, jako na pozvánce */
+  /* vodorovná linka mezi sekcemi */
   section::before {
     content: '';
     display: block;
-    width: 1px;
-    height: 40px;
+    width: clamp(120px, 28vw, 260px);
+    height: 1px;
     background: var(--muted);
     margin: 0 auto var(--gap-block);
   }
