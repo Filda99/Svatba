@@ -159,6 +159,7 @@
     margin: 1.2rem 0 1.4rem;
   }
   .hero h1 em { font-family: var(--font-amp); font-style: italic; font-weight: 400; color: var(--accent); }
+  .hero-joke { font-style: italic; max-width: 26rem; margin: -.4rem auto 1.3rem; color: var(--text-strong); text-shadow: 0 0 8px var(--bg), 0 0 16px var(--bg); }
   .deco { display: block; height: auto; margin-left: auto; margin-right: auto; }
   .deco-rings { width: clamp(96px, 12vw, 130px); margin-top: -.2rem; margin-bottom: 1.5rem; }
   .deco-rings-foot { margin-top: 0; margin-bottom: 1.1rem; }
@@ -293,11 +294,12 @@
     from { opacity: 0; filter: blur(14px); transform: translateY(14px) scale(.98); }
     to   { opacity: 1; filter: blur(0);    transform: none; }
   }
-  .hero .kicker, .hero h1, .hero .deco-rings, .hero .date-block, .hero .rule, .hero .countdown, .hero .btn {
+  .hero .kicker, .hero h1, .hero .hero-joke, .hero .deco-rings, .hero .date-block, .hero .rule, .hero .countdown, .hero .btn {
     animation: mistIn 2.2s cubic-bezier(.2,.6,.2,1) both;
   }
   .hero .kicker      { animation-delay: .3s; }
   .hero h1           { animation-delay: .8s; }
+  .hero .hero-joke   { animation-delay: 1s; }
   .hero .deco-rings  { animation-delay: 1.2s; }
   .hero .date-block  { animation-delay: 1.6s; }
   .hero .rule        { animation-delay: 2s; }
@@ -317,7 +319,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .hero::before { animation: none; }
-    .hero .kicker, .hero h1, .hero .deco-rings, .hero .date-block, .hero .rule, .hero .countdown, .hero .btn { animation: none; }
+    .hero .kicker, .hero h1, .hero .hero-joke, .hero .deco-rings, .hero .date-block, .hero .rule, .hero .countdown, .hero .btn { animation: none; }
     .js .reveal { opacity: 1; filter: none; transform: none; transition: none; }
     html { scroll-behavior: auto; }
   }
@@ -341,6 +343,7 @@
   <div class="hero-main">
     <div class="eyebrow kicker">Zveme vás na naši svatbu</div>
     <h1>Filip <em>&amp;</em> Anička</h1>
+    <p class="hero-joke">Nevíme, jak to Filip dokázal, ale Anička souhlasila.</p>
     <img class="deco deco-rings" src="img/prstynky.png" alt="" width="96" height="77">
     <div class="date-block">
       <span class="eyebrow">sobota</span>
@@ -369,7 +372,7 @@
         <img src="img/jak-se-dostat.jpg" width="1287" height="832" loading="lazy" decoding="async"
              alt="Nakreslená mapa cesty z&nbsp;centra Jedovnic kolem rybníka Olšovec k&nbsp;penzionu Kůlna. Za zákazem vjezdu pokračujte rovně lesní cestou.">
       </a>
-      <figcaption>Z&nbsp;centra Jedovnic pokračujte kolem rybníka Olšovec. Zákaz vjezdu se vás netýká, pokud jedete na Kůlnu – projeďte a&nbsp;pokračujte rovně lesní cestou. Klepnutím mapu zvětšíte.</figcaption>
+      <figcaption>Z&nbsp;centra Jedovnic pokračujte kolem rybníka Olšovec. Pak narazíte na zákaz vjezdu a&nbsp;vnitřní hlas vám zašeptá: „To je past.“ Není. Zákaz se netýká těch, kdo jedou na Kůlnu, tedy vás. Projeďte a&nbsp;pokračujte rovně lesní cestou. Klepnutím mapu zvětšíte, klidně i&nbsp;dvakrát.</figcaption>
     </figure>
 
     <div class="btn-row">
@@ -401,8 +404,8 @@
     <p class="lead">Rodina to má jasné: přespí v&nbsp;penzionu a&nbsp;zaplatíme to my. Přátelé si můžou užít kempování pod širým nebem, nebo se po zábavě nechat odvézt domů do vlastní postele.</p>
     <div class="rows">
       <div class="row"><h3>Spaní v&nbsp;penzionu</h3><p>Pro rodinu. Postel, střecha nad hlavou a&nbsp;zaplaceno. Jen nám prosím včas dejte vědět, že o&nbsp;spaní stojíte, ať s&nbsp;vámi můžeme počítat.</p></div>
-      <div class="row"><h3>Spaní ve stanu</h3><p>Pro přátele. Přivezte si stan a&nbsp;postavte ho venku na trávě u&nbsp;penzionu. WC bude po ruce. Se sprchou ještě jednáme, tak nám držte palce.</p></div>
-      <div class="row"><h3>Snídaně</h3><p>Snídani si můžete objednat předem po domluvě za příplatek. Hladový host je nešťastný host, takže nám prosím včas dejte vědět.</p></div>
+      <div class="row"><h3>Spaní ve stanu</h3><p>Pro přátele. Přivezte si vlastní stan a&nbsp;postavte ho venku na trávě u&nbsp;penzionu, jako na festivalu, jen s&nbsp;lepší společností. WC i&nbsp;sprcha budou po ruce.</p></div>
+      <div class="row"><h3>Snídaně</h3><p>Snídani si můžete objednat předem po domluvě za příplatek. Hladový host je nešťastný host a&nbsp;ráno po svatbě i&nbsp;dost nebezpečný, takže nám prosím včas dejte vědět.</p></div>
     </div>
     <p>Penzion leží v&nbsp;tiché krajině Moravského krasu. Více o&nbsp;místě najdete na <a href="https://kulna-jedovnice.cz/" target="_blank" rel="noopener">kulna-jedovnice.cz</a>.</p>
   </div>
